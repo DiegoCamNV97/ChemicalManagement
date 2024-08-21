@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>ChemicalManagement - Admin</title>
+    <!--CSS-->
+    <link rel="stylesheet" href="./FrontEnd/Library/libraryCSS/bootstrap.min.css">
+    <link rel="stylesheet" href="./FrontEnd/Library/styleAdmin.css">
+</head>
+<body>
+    <!--Header-->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="./FrontEnd/IMG/logo.png" alt="Logo">
+            </a>
+            <span class="navbar-brand-centered">ChemicalManagement™</span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://via.placeholder.com/40" alt="Avatar" class="avatar">
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--Center-->
+    <div class="container">
+        <div class="row mt-5 mb-5">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <!--Cuadro de logIn-->
+                <div class="card">
+                    <!--Header logIn-->
+                    <div class="card-header text-white">Panel de Control</div>
+                <!--body logIn-->
+                <div class="card-body">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#home">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#menu1">Crear Usuario</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#menu2">Editar Usuarios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#genContra">Generador de Contraseñas</a>
+                        </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <!--Inicio-->
+                        <div class="tab-pane container active" id="home">
+                            <h3>Bienvenido</h3>
+                            <p>
+                                Para comenzar, seleccione una opción a continuación:
+                            </p>
+                                <a class="btn btn-primary" data-bs-toggle="tab" href="#menu1">Crear Usuario</a>
+                                <a class="btn btn-secondary" data-bs-toggle="tab" href="#menu2">Editar Usuarios</a>
+                        </div>
+                        <!--Crear Usuario-->
+                        <div class="tab-pane container fade" id="menu1">
+                            <form action="" id="formulario">
+                                <!--Nombres-->
+                                <div class="bm-3 mt-3">
+                                    <label for="nombres" class="form-label">Nombres</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        name="nombres"
+                                        id="nombres"
+                                        required
+                                    />
+                                </div>
+                                <!--Apellidos-->
+                                <div class="bm-3 mt-3">
+                                    <label for="apellidos" class="form-label">Apellidos</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        name="apellidos"
+                                        id="apellidos"
+                                        required
+                                    />
+                                </div>
+                                <!--iD-->
+                                <div class="bm-3 mt-3">
+                                    <label for="iD" class="form-label">Número de Identificación</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        name="iD"
+                                        id="iD"
+                                        required
+                                    />
+                                </div>
+                                <!--Fecha de Nacimiento-->
+                                <div class="bm-3 mt-3">
+                                    <label for="fn" class="form-label">Fecha de Nacimiento</label>
+                                    <input
+                                        type="date"
+                                        class="form-control"
+                                        name="fn"
+                                        id="fn"
+                                        required
+                                    />
+                                </div>
+                                <!--correo-->
+                                <div class="bm-3 mt-3">
+                                    <label for="email" class="form-label">E-Mail</label>
+                                    <input
+                                        type="email"
+                                        class="form-control"
+                                        name="email"
+                                        id="email"
+                                        required
+                                    />
+                                </div>
+                                <!--usuario-->
+                                <div class="bm-3 mt-3">
+                                    <label for="usuario" class="form-label">Usuario Asignado</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        name="usuario"
+                                        id="usuario"
+                                        required
+                                    />
+                                </div>
+                                <!--Contraseña-->
+                                <div class="bm-3 mt-3">
+                                    <label for="contrasenia" class="form-label">Contraseña Asignada</label>
+                                    <p><small>Por favor utilice el <a data-bs-toggle="tab" href="#genContra">Generador de Contraseñas</a></small></p>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        name="contrasenia"
+                                        id="contrasenia"
+                                        required
+                                    />
+                                </div>
+                                <!--Datos Adjuntos-->
+                                <div class="bm-3 mt-3">
+                                    <label for="adjuntos" class="form-label">¿Archivos Adjuntos?</label>
+                                    <input
+                                        type="file"
+                                        class="form-control"
+                                        name="adjuntos"
+                                        id="adjuntos"
+                                    />
+                                </div>
+                                <!--Botones-->
+                                <br>
+                                <button class="btn btn-success">Guardar</button>
+                                <button class="btn btn-danger">Cancelar</button>
+                            </form>
+                        </div>
+                        <!--Editar Usuarios-->
+                        <div class="tab-pane container fade" id="menu2">
+                            En Construcción...
+                        </div>
+                        <!--Generador de Contraseñas-->
+                        <div class="tab-pane container fade" id="genContra">
+                            <div class="container">
+                                <div class="mb-3">
+                                    <label for="length" class="form-label">Longitud de la contraseña:</label>
+                                    <input type="number" class="form-control" id="length" min="1" value="12">
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="uppercase" checked>
+                                    <label class="form-check-label" for="uppercase">Incluir letras mayúsculas</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="lowercase" checked>
+                                    <label class="form-check-label" for="lowercase">Incluir letras minúsculas</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="numbers" checked>
+                                    <label class="form-check-label" for="numbers">Incluir números</label>
+                                </div>
+                                <div class="form-check mb-4">
+                                    <input class="form-check-input" type="checkbox" id="special" checked>
+                                    <label class="form-check-label" for="special">Incluir caracteres especiales</label>
+                                </div>
+                                <div class="d-grid">
+                                    <button class="btn btn-primary" onclick="generatePassword()">Generar Contraseña</button>
+                                </div>
+                                <div class="mt-4">
+                                    <label for="password" class="form-label">Contraseña Generada:</label>
+                                    <input type="text" class="form-control" id="password" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Buttom-->
+                <div class="card-footer text-white">
+                    <small>Todos los derechos reservados ©2024 - ChemicalManagement™ </small>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+    <!--JAVA-SCRIPT-->
+    <script src="./FrontEnd/Library/scriptAdmin.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="./FrontEnd/Library/libraryJS/bootstrap.min.js"></script>
+    <script src="./FrontEnd/Library/libraryJS/bootstrap.bundle.min.js"></script>
+</body>
+</html>

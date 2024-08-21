@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>ChemicalManagement - LogIn</title>
+    <!--CSS-->
+    <link rel="stylesheet" href="./FronEnd/Library/libraryCSS/bootstrap.css"/>
+    <link rel="stylesheet" href="./FrontEnd/Library/styleLogin.css"/>
+</head>
+<body>
+    <!--Header-->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="./FrontEnd/IMG/logo.png" alt="Logo">
+            </a>
+            <span class="navbar-brand-centered">ChemicalManagement™</span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+    <!--Center-->
+    <div class="container">
+        <div class="row mt-5 mb-5">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <!--Cuadro de logIn-->
+                <div class="card">
+                    <!--Header logIn-->
+                    <div class="card-header text-white">Inicia Sesión</div>
+                <!--body logIn-->
+                <div class="card-body">
+                    <div class="img">
+                        <img src="./FrontEnd/IMG/logo.png" alt="" class="imgL">
+                    </div>
+                    <form action="" id="formulario">
+                        <!--Usuario-->
+                        <div class="form-floating mb-3 mt-3">
+                            <input type="text" class="form-control" id="email" placeholder="Ingresa tu Usuario" name="usuario" required>
+                            <label for="usuario">Usuario</label>
+                        </div>
+                        <!--Contraseña-->
+                        <div class="form-floating mt-3 mb-3">
+                            <input type="password" class="form-control" id="pwd" placeholder="Ingresa tu Contraseña" name="pswd" required>
+                            <label for="pwd">Contraseña</label>
+                        </div>
+                    </form>
+                <!--Buttom logIn-->
+                </div>
+                <div class="card-footer text-white">
+                    <!--Boton inicio de sesión-->
+                    <button class="btn btn-success">Iniciar Sesión</button>
+                    <!--Botón soporte-->
+                    <button
+                        data-bs-toggle="collapse"
+                        data-bs-target="#demo"
+                        class="btn btn-danger"
+                    >
+                        Soporte
+                    </button>
+                    <div id="demo" class="collapse">
+                        En caso de que requiera soporte, por favor comuníquese a la línea +57 3213722354 o escríbanos un correo a la dirección de E-Mail
+                        <a href="mailto:soporte@chemicalmanagement.com">
+                            soporte@ChemicalManagement.com
+                        </a>
+                        <br>
+                        <b>
+                            ¡No olvides describir detalladamente tu inconveniente para brindarte la mejor solución!
+                        </b>
+                        <br>
+                        <small>
+                            <i>
+                                Equipo de ChemicalManagement
+                            </i>
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+    <!--JAVA-SCRIPT-->
+    <script src="./FrontEnd/Library/libraryJS/bootstrap.js"></script>
+</body>
+</html>

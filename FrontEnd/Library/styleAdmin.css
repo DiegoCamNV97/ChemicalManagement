@@ -1,0 +1,40 @@
+body {
+    background-image: url(/IMG/bgLogIn.jpg);
+    background-size: 100%;
+}
+
+.card .card-header {
+    background-color: rgba(0, 0, 0, 0.781);
+}
+
+.card .card-footer {
+    background-color: rgba(0, 0, 0, 0.781);
+}
+
+.navbar {
+    background-color: rgba(212, 210, 210, 0.781);
+    border-bottom: 2px rgba(255, 255, 255, 0.473) solid;
+}
+
+.navbar-nav {
+    margin-left: auto;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.navbar-brand img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.navbar-brand-centered {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+}
