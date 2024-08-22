@@ -62,8 +62,42 @@
                             <div class="tab-pane container active p-5" id="search">
                                 <form class="d-flex">
                                     <input class="form-control me-2" type="text" placeholder="Search">
-                                    <button class="btn btn-primary" type="button">Search</button>
+                                    <button class="btn btn-primary" type="button" id="buscarG">Search</button>
                                 </form>
+                                <table class="table" id="tablaT">
+                                    <tr>
+                                        <th>Código</th>
+                                        <th>Nombre</th>
+                                        <th>CAS</th>
+                                        <th>Ubicación</th>
+                                        <th>Unidad de Medida</th>
+                                        <th>Presentación</th>
+                                        <th>Lote</th>
+                                        <th>Palabra de Advertencia</th>
+                                        <th>Pictogramas SGA</th>
+                                        <th>Frases H</th>
+                                        <th>Frases P</th>
+                                        <th>Fecha de Fabricación</th>
+                                        <th>Fecha de Vencimiento</th>
+                                        <th>Distribuidor</th>
+                                    </tr>
+                                    <tr>
+                                        <td>xxx</td>
+                                        <td>xxx</td>
+                                        <td>xxx</td>
+                                        <td>xxx</td>
+                                        <td>xxx</td>
+                                        <td>xxx</td>
+                                        <td>xxx</td>
+                                        <td>xxx</td>
+                                        <td>xxx</td>
+                                        <td>xxx</td>
+                                        <td>xxx</td>
+                                        <td>xxx</td>
+                                        <td>xxx</td>
+                                        <td>xxx</td>
+                                    </tr>
+                                </table>
                             </div>
                             <!--Alertas-->
                             <div class="tab-pane container fade mt-2 mb-2" id="alertas">
@@ -167,8 +201,8 @@
                                             </div>
                                             <!--Botones-->
                                             <br>
-                                            <button class="btn btn-success">Guardar</button>
-                                            <button class="btn btn-danger">Cancelar</button>
+                                            <button class="btn btn-success" id="guardarRU">Guardar</button>
+                                            <button class="btn btn-danger" id="cancelarRU">Cancelar</button>
                                         </form>
                                     </div>
                                     <!--
@@ -462,8 +496,8 @@
                                             <label for="distribuidor">Distribuidor</label>
                                         </div>
                                         <div class="mt-2">
-                                            <button class="btn btn-success" id="guardarNRea">Guardar</button>
-                                            <button class="btn btn-secondary" id="cancelarNRea">Cancelar</button>
+                                            <button class="btn btn-success" id="guardarNR">Guardar</button>
+                                            <button class="btn btn-secondary" id="cancelarNR">Cancelar</button>
                                         </div>
                                     </form>
                                     </div>
@@ -550,7 +584,7 @@
                                 <div class="tab-pane container active p-5" id="search">
                                     <form class="d-flex">
                                         <input class="form-control me-2" type="text" placeholder="Buscar">
-                                        <button class="btn btn-primary" type="button">Search</button>
+                                        <button class="btn btn-primary" type="button" id="buscarT">Search</button>
                                     </form>
                                 </div>
                                 <div class="row">
@@ -562,7 +596,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <table class="table">
+                                        <table class="table" id="tablaT">
                                             <tr>
                                                 <th>Código</th>
                                                 <th>Nombre</th>

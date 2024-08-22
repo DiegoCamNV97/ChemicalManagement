@@ -1,0 +1,7 @@
+buscador reactivos = "buscarG"
+Buscador Trazabilidad = "buscarT"
+Botón Guardar Nuevo Reactivo = guardarNR
+Botón Cancelar Registro de Nuevo Reactivo = cancelarNR
+Botón Guardar Uso de Reactivo = guardarRU
+Botón Cancelar Registro Uso = cancelarRU
+Tabla de Trazabilidad = tablaT
