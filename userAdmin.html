@@ -61,13 +61,11 @@
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <!--Inicio-->
-                            <div class="tab-pane container active" id="home">
+                            <div class="tab-pane container active show" id="home">
                                 <h3>Bienvenido</h3>
                                 <p>
-                                    Para comenzar, seleccione una opción a continuación:
+                                    Para comenzar, seleccione una opción del menú superior.
                                 </p>
-                                    <a class="btn btn-primary" data-bs-toggle="tab" href="#menu1">Crear Usuario</a>
-                                    <a class="btn btn-secondary" data-bs-toggle="tab" href="#menu2">Editar Usuarios</a>
                             </div>
                             <!--Crear Usuario-->
                             <div class="tab-pane container fade" id="menu1">
@@ -172,14 +170,30 @@
                                     <input class="form-control me-2" type="text" placeholder="Search">
                                     <button class="btn btn-primary" type="button" id="buscarG">Buscar</button>
                                 </form>
-                                <table class="table table-hover">
-                                    <tr>
-                                        <th>Usuario</th><th>Contraseña</th><th>Opciones</th>
-                                    </tr>
-                                    <tr>
-                                        <td>xx</td><td>xx</td><td><a href="editorUsuarios.html"><button id="btnEU" class="btn btn-primary">Editar</button><button id="btnDU">Eliminar</button></a></td>
-                                    </tr>
-                                </table>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover" id="tablaT">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Usuario</th>
+                                                            <th>Contraseña</th>
+                                                            <th>Opciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>xxx</td>
+                                                            <td>xxx</td>
+                                                            <td><a href="editorUsuarios.html"><button id="btnEU" class="btn btn-primary m-1">Editar</button></a><button id="btnDU" class="btn btn-danger m-1">Eliminar</button></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <!--Generador de Contraseñas-->
                             <div class="tab-pane container fade" id="genContra">

@@ -7,6 +7,7 @@
     <!--CSS-->
     <link rel="stylesheet" href="./FrontEnd/Library/libraryCSS/bootstrap.css"/>
     <link rel="stylesheet" href="./FrontEnd/Library/styleUser.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <!--Header-->
@@ -635,41 +636,49 @@
                                 <button class="btn btn-primary" type="button" id="buscarT">Search</button>
                             </form>
                         </div>
-                        <div class="row">
-                            <div class="col-10"></div>
-                            <div class="col-2">
-                                <a href="#"><img class="imgIcon" src="./FrontEnd/IMG/icon/impresora.png" alt=""></a>
-                                <a href="#"><img class="imgIcon" src="./FrontEnd/IMG/icon/pdf.png" alt=""></a>
+                        <div class="float-right">
+                            <!-- Icono de impresión -->
+                            <button class="btn btn-outline-primary">
+                                <i class="fas fa-print"></i> Imprimir
+                            </button>
+                        
+                            <!-- Icono de descarga de PDF -->
+                            <button class="btn btn-outline-success">
+                                <i class="fas fa-file-pdf"></i> Descargar PDF
+                            </button>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover" id="tablaTr">
+                                            <thead>
+                                                <tr>
+                                                    <th>Código</th>
+                                                    <th>Nombre</th>
+                                                    <th>Tipo de Movimiento</th>
+                                                    <th>Fecha de Movimiento</th>
+                                                    <th>Cantidad</th>
+                                                    <th>Unidad de Medida</th>
+                                                    <th>Usuario Responsable</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>xxx</td>
+                                                    <td>xxx</td>
+                                                    <td>xxx</td>
+                                                    <td>xxx</td>
+                                                    <td>xxx</td>
+                                                    <td>xxx</td>
+                                                    <td>xxx</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                <table class="table" id="tablaT">
-                                    <tr>
-                                        <th>Código</th>
-                                        <th>Nombre</th>
-                                        <th>Tipo de Movimiento</th>
-                                        <th>Fecha de Movimiento</th>
-                                        <th>Cantidad</th>
-                                        <th>Unidad de Medida</th>
-                                        <th>Usuario Responsable</th>
-                                    </tr>
-                                    <tr>
-                                        <td>xxx</td>
-                                        <td>Reactivo X</td>
-                                        <td>Nuevo Reactivo/Uso/Eliminación</td>
-                                        <td>xx/xx/xxxx</td>
-                                        <td>xxx.xxxx</td>
-                                        <td>xx</td>
-                                        <td>xxxx</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="card-footer bg-dark text-white">
             <small>Todos los derechos reservados ©2024 - ChemicalManagement™</small>
         </div>
