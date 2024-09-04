@@ -288,11 +288,6 @@
                                     <li class="nav-item">
                                         <a class="nav-link active" data-bs-toggle="tab" href="#nuevoReg">Nuevo Registro</a>
                                     </li>
-                                    <!--
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#resumenReg">Resumen de Registro</a>
-                                    </li>
-                                    -->
                                 </ul>
                                 <!--Contenido Registro Uso-->
                                 <div class="tab-content">
@@ -362,34 +357,6 @@
                                             <button class="btn btn-danger" id="cancelarRU">Cancelar</button>
                                         </form>
                                     </div>
-                                    <!--
-                                    <div class="tab-pane container fade" id="resumenReg">
-                                        <table class="table">
-                                            <tr>
-                                                <th>Código</th>
-                                                <td>xxx</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Nombre</th>
-                                                <td>Reactivo x</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Unidad de Medida</th>
-                                                <td>xx</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Cantidad Utilizada</th>
-                                                <td>x.xxxx</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Restante en Stock</th>
-                                                <td>xxx.xxxx</td>
-                                            </tr>
-                                        </table>
-                                        <button class="btn btn-secondary">Atras</button>
-                                        <button class="btn btn-success">Guardar</button>
-                                    </div>
-                                    -->
                                 </div>
                             </div>
                             <!--Nuevo Reactivo-->
@@ -448,7 +415,7 @@
                                             required
                                         />
                                     </div>
-                                    <!-Datos Básicos-->
+                                    <!--Datos Básicos-->
                                     <div>
                                         <label for="ubicacion" class="form-label mt-2">Ubicación del Reactivo</label>
                                         <select
@@ -658,134 +625,57 @@
                                     </div>
                                 </form>
                             </div>
-                                    <!--Resumen
-                                    <div class="tab-pane container fade" id="resumenNR">
-                                        <table class="table">
-                                            <tr>
-                                                <th>Código</th>
-                                                <td>xxx</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Nombre</th>
-                                                <td>Reactivo x</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Ficha de Datos de Seguridad</th>
-                                                <td><a href="#">FDS-xxx-xxxxxxx</a></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Certificado de Análisis</th>
-                                                <td><a href="#">CA-xxx-xxxxxxxx</a></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Factura de Venta</th>
-                                                <td><a href="#">FV-xxx-xxxxxxxx</a></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Ubicación del Reactivo</th>
-                                                <td>Ubicación X</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Unidad de Medida</th>
-                                                <td>xx</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Presentación</th>
-                                                <td>xxx.xxxx</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Lote</th>
-                                                <td>xxxxxxxxx</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Fecha de Fabricación</th>
-                                                <td>xx/xx/xxxx</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Fecha de Vencimiento</th>
-                                                <td>xx/xx/xxxx</td>
-                                            </tr>
-                                            <tr>
-                                                <th>CAS</th>
-                                                <td>xxx-xxx-xxx</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Palabra de Advertencia</th>
-                                                <td>Atención/Peligro</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Pictogramas de Seguridad</th>
-                                                <td>...</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Frases H</th>
-                                                <td>...</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Frases P</th>
-                                                <td>...</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Distribuidor</th>
-                                                <td>Distribuidr X</td>
-                                            </tr>
-                                        </table>
-                                        <button class="btn btn-secondary">Atras</button>
-                                        <button class="btn btn-success">Guardar</button>
-                                    </div>
-                                    -->
-                                </div>
+                        </div>
+                    </div>
+                    <!--Trazabilidad-->
+                    <div class="tab-pane container fade" id="trazabilidad">
+                        <div class="tab-pane container active p-5" id="search">
+                            <form class="d-flex">
+                                <input class="form-control me-2" type="text" placeholder="Buscar">
+                                <button class="btn btn-primary" type="button" id="buscarT">Search</button>
+                            </form>
+                        </div>
+                        <div class="row">
+                            <div class="col-10"></div>
+                            <div class="col-2">
+                                <a href="#"><img class="imgIcon" src="./FrontEnd/IMG/icon/impresora.png" alt=""></a>
+                                <a href="#"><img class="imgIcon" src="./FrontEnd/IMG/icon/pdf.png" alt=""></a>
                             </div>
-                            <!--Trazabilidad-->
-                            <div class="tab-pane container fade" id="trazabilidad">
-                                <div class="tab-pane container active p-5" id="search">
-                                    <form class="d-flex">
-                                        <input class="form-control me-2" type="text" placeholder="Buscar">
-                                        <button class="btn btn-primary" type="button" id="buscarT">Search</button>
-                                    </form>
-                                </div>
-                                <div class="row">
-                                    <div class="col-10"></div>
-                                    <div class="col-2">
-                                        <a href="#"><img class="imgIcon" src="./FrontEnd/IMG/icon/impresora.png" alt=""></a>
-                                        <a href="#"><img class="imgIcon" src="./FrontEnd/IMG/icon/pdf.png" alt=""></a>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <table class="table" id="tablaT">
-                                            <tr>
-                                                <th>Código</th>
-                                                <th>Nombre</th>
-                                                <th>Tipo de Movimiento</th>
-                                                <th>Fecha de Movimiento</th>
-                                                <th>Cantidad</th>
-                                                <th>Unidad de Medida</th>
-                                                <th>Usuario Responsable</th>
-                                            </tr>
-                                            <tr>
-                                                <td>xxx</td>
-                                                <td>Reactivo X</td>
-                                                <td>Nuevo Reactivo/Uso/Eliminación</td>
-                                                <td>xx/xx/xxxx</td>
-                                                <td>xxx.xxxx</td>
-                                                <td>xx</td>
-                                                <td>xxxx</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <table class="table" id="tablaT">
+                                    <tr>
+                                        <th>Código</th>
+                                        <th>Nombre</th>
+                                        <th>Tipo de Movimiento</th>
+                                        <th>Fecha de Movimiento</th>
+                                        <th>Cantidad</th>
+                                        <th>Unidad de Medida</th>
+                                        <th>Usuario Responsable</th>
+                                    </tr>
+                                    <tr>
+                                        <td>xxx</td>
+                                        <td>Reactivo X</td>
+                                        <td>Nuevo Reactivo/Uso/Eliminación</td>
+                                        <td>xx/xx/xxxx</td>
+                                        <td>xxx.xxxx</td>
+                                        <td>xx</td>
+                                        <td>xxxx</td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="card-footer bg-dark text-white">
-                    <small>Todos los derechos reservados ©2024 - ChemicalManagement™</small>
-                </div>
             </div>
+        </div>
+        <div class="card-footer bg-dark text-white">
+            <small>Todos los derechos reservados ©2024 - ChemicalManagement™</small>
         </div>
         <div class="col-1"></div>
     </div>
+
     <!--JAVA-SCRIPT-->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="./FrontEnd/Library/libraryJS/bootstrap.min.js"></script>
