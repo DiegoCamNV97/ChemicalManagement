@@ -15,3 +15,5 @@ botón reactivos por vencer Editar = btnRPVE
 botón reactivos por vencer solucionado = btnRPVS
 tabla reactivos poco stock = tablaRPS
 botón reactivos poco stock Editar = btnRPSE
+
+...
