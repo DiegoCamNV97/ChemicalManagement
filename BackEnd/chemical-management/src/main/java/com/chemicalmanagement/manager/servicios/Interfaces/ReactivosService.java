@@ -10,4 +10,5 @@ public interface ReactivosService {
     Reactivos guardarReactivo(Reactivos reactivo);
     void eliminarReactivo(int id);
     Optional<Reactivos> buscarPorNombre(String nombre);
+    
 }
