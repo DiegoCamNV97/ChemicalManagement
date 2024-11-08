@@ -3,7 +3,6 @@ package com.chemicalmanagement.manager.servicios.Implementaciones;
 import com.chemicalmanagement.manager.entidades.Usuarios;
 import com.chemicalmanagement.manager.repositorios.UsuariosRepository;
 import com.chemicalmanagement.manager.servicios.Interfaces.UsuariosService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +13,6 @@ public class UsuariosServiceImpl implements UsuariosService {
 
     private final UsuariosRepository usuariosRepository;
 
-    @Autowired
     public UsuariosServiceImpl(UsuariosRepository usuariosRepository) {
         this.usuariosRepository = usuariosRepository;
     }

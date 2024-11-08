@@ -2,7 +2,6 @@ package com.chemicalmanagement.manager.controladores;
 
 import com.chemicalmanagement.manager.entidades.Reactivos;
 import com.chemicalmanagement.manager.servicios.Interfaces.ReactivosService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +16,6 @@ public class ReactivosController {
 
     private final ReactivosService reactivosService;
 
-    @Autowired
     public ReactivosController(ReactivosService reactivosService) {
         this.reactivosService = reactivosService;
     }

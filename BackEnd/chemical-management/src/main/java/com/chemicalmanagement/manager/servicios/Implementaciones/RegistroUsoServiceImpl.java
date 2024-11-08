@@ -3,7 +3,6 @@ package com.chemicalmanagement.manager.servicios.Implementaciones;
 import com.chemicalmanagement.manager.entidades.RegistroUso;
 import com.chemicalmanagement.manager.repositorios.RegistroUsoRepository;
 import com.chemicalmanagement.manager.servicios.Interfaces.RegistroUsoService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +13,6 @@ public class RegistroUsoServiceImpl implements RegistroUsoService {
 
     private final RegistroUsoRepository registroUsoRepository;
 
-    @Autowired
     public RegistroUsoServiceImpl(RegistroUsoRepository registroUsoRepository) {
         this.registroUsoRepository = registroUsoRepository;
     }

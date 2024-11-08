@@ -2,7 +2,6 @@ package com.chemicalmanagement.manager.controladores;
 
 import com.chemicalmanagement.manager.entidades.Usuarios;
 import com.chemicalmanagement.manager.servicios.Interfaces.UsuariosService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +16,6 @@ public class UsuariosController {
 
     private final UsuariosService usuariosService;
 
-    @Autowired
     public UsuariosController(UsuariosService usuariosService) {
         this.usuariosService = usuariosService;
     }
