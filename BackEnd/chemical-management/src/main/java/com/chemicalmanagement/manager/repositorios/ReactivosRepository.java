@@ -26,5 +26,5 @@ public interface ReactivosRepository extends JpaRepository<Reactivos, Integer> {
     List<Reactivos> findByPalabraAdvertencia(String palabraAdvertencia);
     
     // Consulta personalizada para otener reactivos por nombre
-    Optional<Reactivos> findByNombre(String nombre);
+    Optional<Reactivos> findByNombreReactivo(String nombreReactivo);
 }

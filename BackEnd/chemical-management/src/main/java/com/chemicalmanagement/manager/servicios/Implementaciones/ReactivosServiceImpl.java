@@ -37,6 +37,6 @@ public class ReactivosServiceImpl implements ReactivosService {
 
     @Override
     public Optional<Reactivos> buscarPorNombre(String nombre) {
-        return reactivosRepository.findByNombre(nombre);
+        return reactivosRepository.findByNombreReactivo(nombre);
     }
 }

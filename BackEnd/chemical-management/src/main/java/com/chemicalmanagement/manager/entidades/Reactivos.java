@@ -2,6 +2,9 @@ package com.chemicalmanagement.manager.entidades;
 
 import jakarta.persistence.*;
 import java.util.Date;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "reactivos")
@@ -11,62 +14,70 @@ public class Reactivos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, length = 45)
+    @Column(name = "qr", length = 45)
     private String qr;
 
-    @Column(nullable = false, length = 45)
+    @Column(name = "ubicacion", length = 45)
     private String ubicacion;
 
-    @Column(nullable = false, length = 45)
+    @Column(name = "nombreReactivo", length = 45)
     private String nombreReactivo;
 
-    @Column(length = 45)
+    @Column(name = "otrosNombres", length = 45)
     private String otrosNombres;
 
-    @Column(nullable = false, length = 45)
+    @Column(name = "presentacion", length = 45)
     private String presentacion;
 
-    @Column(nullable = false, length = 45)
+    @Column(name = "unidadMedida", length = 45)
     private String unidadMedida;
 
-    @Column(nullable = false, length = 80)
+    @Column(name = "lote", length = 80)
     private String lote;
 
-    @Column(nullable = false)
+    @Column(name = "fechaVencimiento")
     @Temporal(TemporalType.DATE)
     private Date fechaVencimiento;
 
-    @Column(nullable = false)
+    @Column(name = "existencia")
     private Double existencia;
 
-    @Column(nullable = false, length = 45)
+    @Column(name = "cas", length = 45)
     private String cas;
 
-    @Column(nullable = false, length = 80)
+    @Column(name = "formula", length = 80)
     private String formula;
 
-    @Column(nullable = false, length = 45)
+    @Column(name = "palabraAdvertencia", length = 45)
     private String palabraAdvertencia;
 
-    @Column(nullable = false, length = 45)
+    @Column(name = "pictogramasSGA", length = 45)
     private String pictogramasSGA;
 
-    @Column(nullable = false, length = 1000)
+    @Column(name = "frasesH", length = 1000)
     private String frasesH;
 
-    @Column(nullable = false, length = 1000)
+    @Column(name = "frasesP", length = 1000)
     private String frasesP;
 
-    @Column(nullable = false, length = 4)
+    @Column(name = "fichaDatosSeguridad", length = 4)
     private String fichaDatosSeguridad;
 
-    @Column(nullable = false)
+    @Column(name = "vigenciaFDS")
     @Temporal(TemporalType.DATE)
     private Date vigenciaFDS;
 
+    // Relación con Empresa
     @ManyToOne
-    @JoinColumn(name = "empresa_id", nullable = false)
+    @JoinColumn(name = "Empresa_id")
+    @JsonBackReference
     private Empresa empresa;
+
+    // Relación con Registro Uso
+    @OneToMany(mappedBy = "reactivos")
+    @JsonBackReference
+    private List<RegistroUso> registrosUso;
+
 
     // Getters y Setters
 
@@ -220,5 +231,12 @@ public class Reactivos {
 
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
+    }
+    public List<RegistroUso> getRegistrosUso() {
+        return registrosUso;
+    }
+
+    public void setRegistrosUso(List<RegistroUso> registrosUso) {
+        this.registrosUso = registrosUso;
     }
 }

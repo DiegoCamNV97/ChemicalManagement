@@ -3,6 +3,8 @@ package com.chemicalmanagement.manager.entidades;
 import jakarta.persistence.*;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "registrouso")
 public class RegistroUso {
@@ -11,25 +13,27 @@ public class RegistroUso {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(name = "cantidadUtilizada")
     private Double cantidadUtilizada;
 
-    @Column(nullable = false)
+    @Column(name = "fechaUso")
     @Temporal(TemporalType.DATE)
     private Date fechaUso;
 
-    @Column(nullable = false, length = 500)
-    private String responsable;
-
-    @Column(nullable = false, length = 90)
+    @Column(name = "unidadMedida", length = 90)
     private String unidadMedida;
 
+    // Relación con Usuarios
     @ManyToOne
-    @JoinColumn(name = "usuarios_id", nullable = false)
+    @JoinColumn(name = "Usuarios_id")
+    @JsonManagedReference
     private Usuarios usuarios;
+    
 
+    // Relación con Reactivos
     @ManyToOne
-    @JoinColumn(name = "reactivos_id", nullable = false)
+    @JoinColumn(name = "Reactivos_id")
+    @JsonManagedReference
     private Reactivos reactivos;
 
     // Getters y Setters
@@ -56,14 +60,6 @@ public class RegistroUso {
 
     public void setFechaUso(Date fechaUso) {
         this.fechaUso = fechaUso;
-    }
-
-    public String getResponsable() {
-        return responsable;
-    }
-
-    public void setResponsable(String responsable) {
-        this.responsable = responsable;
     }
 
     public String getUnidadMedida() {

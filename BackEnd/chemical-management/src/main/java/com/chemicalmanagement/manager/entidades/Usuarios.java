@@ -2,6 +2,10 @@ package com.chemicalmanagement.manager.entidades;
 
 import jakarta.persistence.*;
 import java.util.Date;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "usuarios")
@@ -11,37 +15,44 @@ public class Usuarios {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "dni", nullable = false, length = 100)
     private String dni;
 
-    @Column(nullable = false, length = 80)
+    @Column(name = "nombres", nullable = false, length = 80)
     private String nombres;
 
-    @Column(nullable = false, length = 80)
+    @Column(name = "apellidos", nullable = false, length = 80)
     private String apellidos;
 
-    @Column(name = "fecha_nacimiento", nullable = false)
+    @Column(name = "fechaNacimiento")
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
 
-    @Column(name = "correo_personal", nullable = false, length = 200)
+    @Column(name = "correoPersonal", nullable = false, length = 200)
     private String correoPersonal;
 
-    @Column(name = "correo_institucional", nullable = false, length = 200, unique = true)
+    @Column(name = "correoInstitucional", nullable = false, unique = true, length = 200)
     private String correoInstitucional;
 
-    @Column(name = "tipo_usuario", nullable = false, length = 90)
+    @Column(name = "tipoUsuario", nullable = false, length = 90)
     private String tipoUsuario;
 
-    @Column(nullable = false, length = 500, unique = true)
+    @Column(name = "usuario", nullable = false, unique = true, length = 500)
     private String usuario;
 
-    @Column(nullable = false, length = 500)
+    @Column(name = "password", nullable = false, length = 500)
     private String password;
 
+    // Relación con Empresa
     @ManyToOne
-    @JoinColumn(name = "empresa_id", nullable = false)
+    @JoinColumn(name = "Empresa_id", nullable = false)
+    @JsonBackReference
     private Empresa empresa;
+
+    // Relación con RegistroUso
+    @OneToMany(mappedBy = "usuarios")
+    @JsonBackReference
+    private List<RegistroUso> registroUsos;
 
     // Getters y Setters
 
@@ -131,5 +142,13 @@ public class Usuarios {
 
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
+    }
+
+    public List<RegistroUso> getRegistroUsos() {
+        return registroUsos;
+    }
+
+    public void setRegistroUsos(List<RegistroUso> registroUsos) {
+        this.registroUsos = registroUsos;
     }
 }
