@@ -10,5 +10,6 @@ public interface ReactivosService {
     Reactivos guardarReactivo(Reactivos reactivo);
     void eliminarReactivo(int id);
     Optional<Reactivos> buscarPorNombre(String nombre);
-    
+    List<Reactivos> listarTodos();
+    List<Reactivos> buscarPorParametros(Integer id, String nombre, String cas);
 }

@@ -3,8 +3,8 @@ package com.chemicalmanagement.manager.entidades;
 import jakarta.persistence.*;
 import java.util.Date;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "reactivos")
@@ -67,17 +67,14 @@ public class Reactivos {
     @Temporal(TemporalType.DATE)
     private Date vigenciaFDS;
 
-    // Relación con Empresa
     @ManyToOne
-    @JoinColumn(name = "Empresa_id")
-    @JsonBackReference
+    @JoinColumn(name = "Empresa_id", nullable = false)
+    @JsonBackReference("empresa-reactivos")
     private Empresa empresa;
 
-    // Relación con Registro Uso
     @OneToMany(mappedBy = "reactivos")
-    @JsonBackReference
+    @JsonManagedReference("reactivos-registroUso")
     private List<RegistroUso> registrosUso;
-
 
     // Getters y Setters
 

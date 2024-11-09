@@ -39,4 +39,13 @@ public class ReactivosServiceImpl implements ReactivosService {
     public Optional<Reactivos> buscarPorNombre(String nombre) {
         return reactivosRepository.findByNombreReactivo(nombre);
     }
+    @Override
+    public List<Reactivos> listarTodos() {
+        return reactivosRepository.findAll();
+    }
+
+    @Override
+    public List<Reactivos> buscarPorParametros(Integer id, String nombre, String cas) {
+        return reactivosRepository.buscarPorParametros(id, nombre, cas);
+    }
 }

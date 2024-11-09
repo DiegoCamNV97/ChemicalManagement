@@ -10,5 +10,5 @@ public interface UsuariosService {
     void eliminarUsuario(int id);
     List<Usuarios> listarTodos();
     Optional<Usuarios> buscarPorCorreoInstitucional(String correoInstitucional);
-    Optional<Usuarios> autenticarUsuario(String usuario, String password); // Nuevo método para autenticación
+    Optional<Usuarios> buscarPorUsuarioYPassword(String usuario, String password); // Nuevo método para autenticación
 }

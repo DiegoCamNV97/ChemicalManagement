@@ -3,7 +3,6 @@ package com.chemicalmanagement.manager.entidades;
 import jakarta.persistence.*;
 import java.util.Date;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -43,16 +42,14 @@ public class Usuarios {
     @Column(name = "password", nullable = false, length = 500)
     private String password;
 
-    // Relación con Empresa
     @ManyToOne
-    @JoinColumn(name = "Empresa_id", nullable = false)
-    @JsonBackReference
+    @JoinColumn(name = "Empresa_id")
+    @JsonBackReference("empresa-usuarios")
     private Empresa empresa;
 
-    // Relación con RegistroUso
     @OneToMany(mappedBy = "usuarios")
-    @JsonBackReference
-    private List<RegistroUso> registroUsos;
+    @JsonManagedReference("usuarios-registroUso")
+    private List<RegistroUso> registrosUso;
 
     // Getters y Setters
 
@@ -144,11 +141,11 @@ public class Usuarios {
         this.empresa = empresa;
     }
 
-    public List<RegistroUso> getRegistroUsos() {
-        return registroUsos;
+    public List<RegistroUso> getRegistrosUso() {
+        return registrosUso;
     }
-
-    public void setRegistroUsos(List<RegistroUso> registroUsos) {
-        this.registroUsos = registroUsos;
+    
+    public void setRegistrosUso(List<RegistroUso> registrosUso) {
+        this.registrosUso = registrosUso;
     }
 }

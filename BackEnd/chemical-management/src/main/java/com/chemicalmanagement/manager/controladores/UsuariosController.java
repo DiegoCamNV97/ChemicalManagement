@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/usuarios")
@@ -65,10 +66,15 @@ public class UsuariosController {
 
     // Autenticación de usuario (inicio de sesión)
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestParam String usuario, @RequestParam String password) {
-        Optional<Usuarios> usuarioAutenticado = usuariosService.autenticarUsuario(usuario, password);
-        if (usuarioAutenticado.isPresent()) {
-            return ResponseEntity.ok("Inicio de sesión exitoso");
+    public ResponseEntity<String> login(@RequestBody Map<String, String> loginData) {
+        String usuario = loginData.get("usuario");
+        String password = loginData.get("password");
+
+        Optional<Usuarios> user = usuariosService.buscarPorUsuarioYPassword(usuario, password);
+
+        if (user.isPresent()) {
+            // Devuelve el tipo de usuario (e.g., "USER" o "ADMIN")
+            return ResponseEntity.ok(user.get().getTipoUsuario());
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales incorrectas");
         }

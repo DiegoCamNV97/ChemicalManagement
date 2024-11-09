@@ -43,7 +43,7 @@ public class UsuariosServiceImpl implements UsuariosService {
     }
 
     @Override
-    public Optional<Usuarios> autenticarUsuario(String usuario, String password) {
+    public Optional<Usuarios> buscarPorUsuarioYPassword(String usuario, String password) {
         return usuariosRepository.findByUsuarioAndPassword(usuario, password);
     }
 }

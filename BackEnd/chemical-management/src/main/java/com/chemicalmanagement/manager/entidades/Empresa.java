@@ -2,7 +2,6 @@ package com.chemicalmanagement.manager.entidades;
 
 import jakarta.persistence.*;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -13,28 +12,27 @@ public class Empresa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "nombre", nullable = false, unique = true, length = 100)
+    @Column(nullable = false, unique = true, length = 100)
     private String nombre;
 
-    @Column(name = "numContacto", nullable = false, length = 45)
+    @Column(nullable = false, length = 45)
     private String numContacto;
 
-    @Column(name = "direccion", length = 45)
+    @Column(length = 45)
     private String direccion;
 
-    @Column(name = "numEmergencias", length = 100)
+    @Column(length = 100)
     private String numEmergencias;
 
-    @Column(name = "tipo", length = 45)
+    @Column(length = 45)
     private String tipo;
 
-    // Relaciones con otras entidades
     @OneToMany(mappedBy = "empresa")
-    @JsonManagedReference
+    @JsonManagedReference("empresa-usuarios")
     private List<Usuarios> usuarios;
 
     @OneToMany(mappedBy = "empresa")
-    @JsonManagedReference
+    @JsonManagedReference("empresa-reactivos")
     private List<Reactivos> reactivos;
 
     // Getters y Setters

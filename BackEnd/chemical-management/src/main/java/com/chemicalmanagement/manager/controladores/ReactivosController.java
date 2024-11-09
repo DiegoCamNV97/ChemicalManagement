@@ -62,4 +62,20 @@ public class ReactivosController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+    // Obtener todos los reactivos o buscar según parámetros
+    @GetMapping("/buscar")
+    public ResponseEntity<List<Reactivos>> buscarReactivos(
+            @RequestParam(required = false) Integer id,
+            @RequestParam(required = false) String nombre,
+            @RequestParam(required = false) String cas) {
+        List<Reactivos> resultados;
+
+        if (id == null && (nombre == null || nombre.isEmpty()) && (cas == null || cas.isEmpty())) {
+            resultados = reactivosService.listarTodos();
+        } else {
+            resultados = reactivosService.buscarPorParametros(id, nombre, cas);
+        }
+
+        return ResponseEntity.ok(resultados);
+    }
 }
