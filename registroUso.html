@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="tab-pane container fade mt-2" id="registroUso">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" data-bs-toggle="tab" href="#nuevoReg">Nuevo Registro</a>
+            </li>
+        </ul>
+        <!--Contenido Registro Uso-->
+        <div class="tab-content">
+            <div class="tab-pane container active" id="nuevoReg">
+                <form action="" id="formulario">
+                    <!--Nombres-->
+                    <div>
+                        <label for="nombre" class="form-label mt-2">Nombre del Reactivo</label>
+                        <select
+                            class="form-control"
+                            name="nombre"
+                            id="nombre"
+                            required
+                        >
+                            <option value="">Selecciona un reactivo</option>
+                            <option value="">Reactivo Controlado 1</option>
+                            <option value="">Reactivo Controlado 2</option>
+                            <option value="">Reactivo Controlado 3</option>
+                            <option value="">Reactivo Controlado 4</option>
+                            <option value="">Reactivo Controlado 5</option>
+                        </select>
+                    </div>
+                    <!--Unidad-->
+                    <div class="bm-3 mt-3">
+                        <label for="unidad" class="form-label">Unidad de Medida</label>
+                        <select
+                            class="form-control"
+                            name="unidad"
+                            id="unidad"
+                            required
+                        >
+                            <option value="">Seleccione una Unidad de Medida</option>
+                            <option value="">L</option>
+                            <option value="">mL</option>
+                            <option value="">uL</option>
+                            <option value="">kg</option>
+                            <option value="">g</option>
+                            <option value="">mg</option>
+                        </select>
+                    </div>
+                    <!--Cantidad-->
+                    <div class="bm-3 mt-3">
+                        <label for="cantidad" class="form-label">Cantidad utilizada</label>
+                        <p><small>Sensibilidad de 0.0001</small></p>
+                        <input
+                            type="number"
+                            step="0.0001"
+                            class="form-control"
+                            name="cantidad"
+                            id="cantidad"
+                            required
+                        />
+                    </div>
+                    <!--Botones-->
+                    <br>
+                    <button class="btn btn-success" id="guardarRU">Guardar</button>
+                    <button class="btn btn-danger" id="cancelarRU">Cancelar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -48,9 +48,6 @@
                         <li class="nav-item">
                             <a class="nav-link" data-bs-toggle="tab" href="#alertas">Alertas</a>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#registroUso">Registro de Uso</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" data-bs-toggle="tab" href="#nuevoR">Nuevo Reactivo</a>
                         </li>
                         <li class="nav-item">
@@ -73,20 +70,23 @@
                                                 <table class="table table-hover" id="reactivosTable">
                                                     <thead>
                                                       <tr>
-                                                        <th>Código</th>
+                                                        <th>Código (ID)</th>
                                                         <th>Nombre</th>
                                                         <th>CAS</th>
-                                                        <th>Ubicación</th>
-                                                        <th>Unidad de Medida</th>
+                                                        <th>Fabricante</th>
                                                         <th>Presentación</th>
+                                                        <th>Unidad de Medida</th>
                                                         <th>Lote</th>
+                                                        <th>Fecha de Fabricación</th>
+                                                        <th>Fecha de Vencimiento</th>
+                                                        <th>Existencia</th>
+                                                        <th>Fórmula</th>
                                                         <th>Palabra de Advertencia</th>
                                                         <th>Pictogramas SGA</th>
                                                         <th>Frases H</th>
                                                         <th>Frases P</th>
-                                                        <th>Fecha de Fabricación</th>
-                                                        <th>Fecha de Vencimiento</th>
-                                                        <th>Distribuidor</th>
+                                                        <th>Ficha de Datos de Seguridad</th>
+                                                        <th>Vigencia FDS</th>
                                                         <th>Opciones</th>
                                                       </tr>
                                                     </thead>
@@ -120,46 +120,33 @@
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="table-responsive">
-                                                        <table class="table table-hover" id="tablaRV">
+                                                        <table class="table table-hover" id="reactivosV">
                                                             <thead>
-                                                                <tr>
-                                                                    <th>Código</th>
-                                                                    <th>Nombre</th>
-                                                                    <th>CAS</th>
-                                                                    <th>Ubicación</th>
-                                                                    <th>Unidad de Medida</th>
-                                                                    <th>Presentación</th>
-                                                                    <th>Lote</th>
-                                                                    <th>Palabra de Advertencia</th>
-                                                                    <th>Pictogramas SGA</th>
-                                                                    <th>Frases H</th>
-                                                                    <th>Frases P</th>
-                                                                    <th>Fecha de Fabricación</th>
-                                                                    <th>Fecha de Vencimiento</th>
-                                                                    <th>Distribuidor</th>
-                                                                    <th>Opciones</th>
-                                                                </tr>
+                                                              <tr>
+                                                                <th>Código (ID)</th>
+                                                                <th>Nombre</th>
+                                                                <th>CAS</th>
+                                                                <th>Fabricante</th>
+                                                                <th>Presentación</th>
+                                                                <th>Unidad de Medida</th>
+                                                                <th>Lote</th>
+                                                                <th>Fecha de Fabricación</th>
+                                                                <th>Fecha de Vencimiento</th>
+                                                                <th>Existencia</th>
+                                                                <th>Fórmula</th>
+                                                                <th>Palabra de Advertencia</th>
+                                                                <th>Pictogramas SGA</th>
+                                                                <th>Frases H</th>
+                                                                <th>Frases P</th>
+                                                                <th>Ficha de Datos de Seguridad</th>
+                                                                <th>Vigencia FDS</th>
+                                                                <th>Opciones</th>
+                                                              </tr>
                                                             </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td><a href="editorReactivos.html"><button id="btnRVE" class="btn btn-primary m-1">Editar</button></a></td>
-                                                                </tr>
+                                                            <tbody id="reactivosVBody">
+                                                              <!-- Las filas se llenarán dinámicamente desde JavaScript -->
                                                             </tbody>
-                                                        </table>
+                                                          </table>  
                                                     </div>
                                                 </div>
                                             </div>
@@ -171,46 +158,33 @@
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="table-responsive">
-                                                        <table class="table table-hover" id="tablaRPV">
+                                                        <table class="table table-hover" id="reactivosPV">
                                                             <thead>
-                                                                <tr>
-                                                                    <th>Código</th>
-                                                                    <th>Nombre</th>
-                                                                    <th>CAS</th>
-                                                                    <th>Ubicación</th>
-                                                                    <th>Unidad de Medida</th>
-                                                                    <th>Presentación</th>
-                                                                    <th>Lote</th>
-                                                                    <th>Palabra de Advertencia</th>
-                                                                    <th>Pictogramas SGA</th>
-                                                                    <th>Frases H</th>
-                                                                    <th>Frases P</th>
-                                                                    <th>Fecha de Fabricación</th>
-                                                                    <th>Fecha de Vencimiento</th>
-                                                                    <th>Distribuidor</th>
-                                                                    <th>Opciones</th>
-                                                                </tr>
+                                                              <tr>
+                                                                <th>Código (ID)</th>
+                                                                <th>Nombre</th>
+                                                                <th>CAS</th>
+                                                                <th>Fabricante</th>
+                                                                <th>Presentación</th>
+                                                                <th>Unidad de Medida</th>
+                                                                <th>Lote</th>
+                                                                <th>Fecha de Fabricación</th>
+                                                                <th>Fecha de Vencimiento</th>
+                                                                <th>Existencia</th>
+                                                                <th>Fórmula</th>
+                                                                <th>Palabra de Advertencia</th>
+                                                                <th>Pictogramas SGA</th>
+                                                                <th>Frases H</th>
+                                                                <th>Frases P</th>
+                                                                <th>Ficha de Datos de Seguridad</th>
+                                                                <th>Vigencia FDS</th>
+                                                                <th>Opciones</th>
+                                                              </tr>
                                                             </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td><a href="editorReactivos.html"><button id="btnRPVE" class="btn btn-primary m-1">Editar</button></a></td>
-                                                                </tr>
+                                                            <tbody id="reactivosPVBody">
+                                                              <!-- Las filas se llenarán dinámicamente desde JavaScript -->
                                                             </tbody>
-                                                        </table>
+                                                          </table>  
                                                     </div>
                                                 </div>
                                             </div>
@@ -222,46 +196,33 @@
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="table-responsive">
-                                                        <table class="table table-hover" id="tablaRPS">
+                                                        <table class="table table-hover" id="reactivosPS">
                                                             <thead>
-                                                                <tr>
-                                                                    <th>Código</th>
-                                                                    <th>Nombre</th>
-                                                                    <th>CAS</th>
-                                                                    <th>Ubicación</th>
-                                                                    <th>Unidad de Medida</th>
-                                                                    <th>Presentación</th>
-                                                                    <th>Lote</th>
-                                                                    <th>Palabra de Advertencia</th>
-                                                                    <th>Pictogramas SGA</th>
-                                                                    <th>Frases H</th>
-                                                                    <th>Frases P</th>
-                                                                    <th>Fecha de Fabricación</th>
-                                                                    <th>Fecha de Vencimiento</th>
-                                                                    <th>Distribuidor</th>
-                                                                    <th>Opciones</th>
-                                                                </tr>
+                                                              <tr>
+                                                                <th>Código (ID)</th>
+                                                                <th>Nombre</th>
+                                                                <th>CAS</th>
+                                                                <th>Fabricante</th>
+                                                                <th>Presentación</th>
+                                                                <th>Unidad de Medida</th>
+                                                                <th>Lote</th>
+                                                                <th>Fecha de Fabricación</th>
+                                                                <th>Fecha de Vencimiento</th>
+                                                                <th>Existencia</th>
+                                                                <th>Fórmula</th>
+                                                                <th>Palabra de Advertencia</th>
+                                                                <th>Pictogramas SGA</th>
+                                                                <th>Frases H</th>
+                                                                <th>Frases P</th>
+                                                                <th>Ficha de Datos de Seguridad</th>
+                                                                <th>Vigencia FDS</th>
+                                                                <th>Opciones</th>
+                                                              </tr>
                                                             </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td>xxx</td>
-                                                                    <td><a href="editorReactivos.html"><button id="btnRPSE" class="btn btn-primary m-1">Editar</button></a></td>
-                                                                </tr>
+                                                            <tbody id="reactivosPSBody">
+                                                              <!-- Las filas se llenarán dinámicamente desde JavaScript -->
                                                             </tbody>
-                                                        </table>
+                                                        </table>  
                                                     </div>
                                                 </div>
                                             </div>
@@ -270,75 +231,10 @@
                                 </div>
                             </div>
                             <!--Registro de Uso-->
-                            <div class="tab-pane container fade mt-2" id="registroUso">
-                                <ul class="nav nav-tabs">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="#nuevoReg">Nuevo Registro</a>
-                                    </li>
-                                </ul>
-                                <!--Contenido Registro Uso-->
-                                <div class="tab-content">
-                                    <div class="tab-pane container active" id="nuevoReg">
-                                        <form action="" id="formulario">
-                                            <!--Nombres-->
-                                            <div>
-                                                <label for="nombre" class="form-label mt-2">Nombre del Reactivo</label>
-                                                <select
-                                                    class="form-control"
-                                                    name="nombre"
-                                                    id="nombre"
-                                                    required
-                                                >
-                                                    <option value="">Selecciona un reactivo</option>
-                                                    <option value="">Reactivo Controlado 1</option>
-                                                    <option value="">Reactivo Controlado 2</option>
-                                                    <option value="">Reactivo Controlado 3</option>
-                                                    <option value="">Reactivo Controlado 4</option>
-                                                    <option value="">Reactivo Controlado 5</option>
-                                                </select>
-                                            </div>
-                                            <!--Unidad-->
-                                            <div class="bm-3 mt-3">
-                                                <label for="unidad" class="form-label">Unidad de Medida</label>
-                                                <select
-                                                    class="form-control"
-                                                    name="unidad"
-                                                    id="unidad"
-                                                    required
-                                                >
-                                                    <option value="">Seleccione una Unidad de Medida</option>
-                                                    <option value="">L</option>
-                                                    <option value="">mL</option>
-                                                    <option value="">uL</option>
-                                                    <option value="">kg</option>
-                                                    <option value="">g</option>
-                                                    <option value="">mg</option>
-                                                </select>
-                                            </div>
-                                            <!--Cantidad-->
-                                            <div class="bm-3 mt-3">
-                                                <label for="cantidad" class="form-label">Cantidad utilizada</label>
-                                                <p><small>Sensibilidad de 0.0001</small></p>
-                                                <input
-                                                    type="number"
-                                                    step="0.0001"
-                                                    class="form-control"
-                                                    name="cantidad"
-                                                    id="cantidad"
-                                                    required
-                                                />
-                                            </div>
-                                            <!--Botones-->
-                                            <br>
-                                            <button class="btn btn-success" id="guardarRU">Guardar</button>
-                                            <button class="btn btn-danger" id="cancelarRU">Cancelar</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                            
                             <!--Nuevo Reactivo-->
                             <div class="tab-pane container fade mt-2" id="nuevoR">
-                                <form action="" id="formulario">
+                                <form action="" id="nuevoReactivo">
                                     <!--Nombres-->
                                     <div>
                                         <label for="nombre" class="form-label mt-2">Nombre del Reactivo</label>
@@ -346,7 +242,7 @@
                                             type="text"
                                             class="form-control"
                                             name="nombre"
-                                            id="nombre"
+                                            id="nombreReactivo"
                                             required
                                         />
                                     </div>
@@ -357,38 +253,49 @@
                                             type="text"
                                             class="form-control"
                                             name="codigo"
-                                            id="codigo"
+                                            id="qr"
                                             required
                                         />
                                     </div>
-                                    <!--Datos Básicos-->
+                                    <!--Ubicación-->
                                     <div>
                                         <label for="ubicacion" class="form-label mt-2">Ubicación del Reactivo</label>
                                         <select
                                             class="form-control"
-                                            name="nombre"
-                                            id="nombre"
+                                            name="ubicacion"
+                                            id="ubicacion"
                                             required
                                         >
                                             <option value="">Seleccione una Ubicación</option>
-                                            <option value="">Ubicación 1</option>
-                                            <option value="">Ubicación 2</option>
-                                            <option value="">Ubicación 3</option>
-                                            <option value="">Ubicación 4</option>
-                                            <option value="">Ubicación 5</option>
+                                            <option value="Ubicación 1">Ubicación 1</option>
+                                            <option value="Ubicación 2">Ubicación 2</option>
+                                            <option value="Ubicación 3">Ubicación 3</option>
+                                            <option value="Ubicación 4">Ubicación 4</option>
+                                            <option value="Ubicación 5">Ubicación 5</option>
                                         </select>
+                                    </div>
+                                    <!--Fabricante (Empresa)-->
+                                    <div class="bm-3 mt-3">
+                                        <label for="fabricante" class="form-label">Fabricante:</label>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            name="fabricante"
+                                            id="fabricante"
+                                            required
+                                        />
                                     </div>
                                     <!--Presentación-->
                                         <!--Cantidad-->
                                     <div class="bm-3 mt-3">
-                                        <label for="cantidad" class="form-label">Presentación</label>
+                                        <label for="presentacion" class="form-label">Presentación</label>
                                         <p><small>Sensibilidad de 0.0001</small></p>
                                         <input
                                             type="number"
                                             step="0.0001"
                                             class="form-control"
-                                            name="cantidad"
-                                            id="cantidad"
+                                            name="presentacion"
+                                            id="presentacion"
                                             required
                                         />
                                     </div>
@@ -398,16 +305,16 @@
                                         <select
                                             class="form-control"
                                             name="unidad"
-                                            id="unidad"
+                                            id="unidadMedida"
                                             required
                                         >
                                             <option value="">Seleccione una Unidad de Medida</option>
-                                            <option value="">L</option>
-                                            <option value="">mL</option>
-                                            <option value="">uL</option>
-                                            <option value="">kg</option>
-                                            <option value="">g</option>
-                                            <option value="">mg</option>
+                                            <option value="L">L (Litros)</option>
+                                            <option value="mL">mL (Mililitros)</option>
+                                            <option value="uL">uL (Microlitros)</option>
+                                            <option value="kg">kg (Kilogramos)</option>
+                                            <option value="g">g (Gramos)</option>
+                                            <option value="mg">mg (Miligramos</option>
                                         </select>
                                     </div>
                                     <!--Lote-->
@@ -428,7 +335,7 @@
                                             type="date"
                                             class="form-control"
                                             name="fF"
-                                            id="fF"
+                                            id="fechaFabricacion"
                                             required
                                         />
                                     </div>
@@ -439,10 +346,23 @@
                                             type="date"
                                             class="form-control"
                                             name="fV"
-                                            id="fV"
+                                            id="fechaVencimiento"
                                             required
                                         />
                                     </div>
+                                    <!--Existencia-->
+                                    <div class="bm-3 mt-3">
+                                        <label for="existencia" class="form-label">Existencia (de ser nuvo ponga la cantidad de presentación)</label>
+                                        <p><small>Sensibilidad de 0.0001</small></p>
+                                        <input
+                                            type="number"
+                                            step="0.0001"
+                                            class="form-control"
+                                            name="existencia"
+                                            id="existencia"
+                                            required
+                                        />
+                                    </div> 
                                     <!--Número CAS-->
                                     <div class="bm-3 mt-3">
                                         <label for="cas" class="form-label">CAS</label>
@@ -454,18 +374,30 @@
                                             required
                                         />
                                     </div>
+                                    <!--Formula Química-->
+                                    <div class="bm-3 mt-3">
+                                        <label for="formula" class="form-label">Formula Química</label>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            name="formula"
+                                            id="formula"
+                                            required
+                                        />
+                                    </div>
                                     <!--Palabra Advertencia-->
                                     <div class="bm-3 mt-3">
-                                        <label for="palabraA" class="form-label">Palabra de Advertencia</label>
+                                        <label for="palabraAdvertencia" class="form-label">Palabra de Advertencia</label>
                                         <select
                                             class="form-control"
-                                            name="lote"
-                                            id="lote"
+                                            name="palabraAdvertencia"
+                                            id="palabraAdvertencia"
                                             required
                                         >
                                             <option value="">Seleccione la Palabra de Advertencia</option>
-                                            <option value="">Atención</option>
-                                            <option value="">Peligro</option>
+                                            <option value="Atención">Atención</option>
+                                            <option value="Peligr">Peligro</option>
+                                            <option value="No Aplica">No Aplica</option>
                                         </select>
                                     </div>
                                     <!--Pictogramas-->
@@ -477,21 +409,21 @@
                                     <div class="row">
                                         <div class="col border border-1">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="check1" name="option1" value="something" checked>
+                                                <input class="form-check-input" type="checkbox" id="check1" value="GHS-01">
                                                 <label class="form-check-label">GHS-01</label>
                                                 <img src="./FrontEnd/IMG/pictogramasSGA/GHS01.png" class="img"/>
                                             </div>
                                         </div>
                                         <div class="col border border-1">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="check2" name="option1" value="something" checked>
+                                                <input class="form-check-input" type="checkbox" id="check2" value="GHS-02">
                                                 <label class="form-check-label">GHS-02</label>
                                                 <img src="./FrontEnd/IMG/pictogramasSGA/GHS02.png" class="img"/>
                                             </div>
                                         </div>
                                         <div class="col border border-1">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="check3" name="option1" value="something" checked>
+                                                <input class="form-check-input" type="checkbox" id="check3" value="GHS-03">
                                                 <label class="form-check-label">GHS-03</label>
                                                 <img src="./FrontEnd/IMG/pictogramasSGA/GHS03.png" class="img"/>
                                             </div>
@@ -500,21 +432,21 @@
                                     <div class="row">
                                         <div class="col border border-1">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="check4" name="option1" value="something" checked>
+                                                <input class="form-check-input" type="checkbox" id="check4" value="GHS-04">
                                                 <label class="form-check-label">GHS-04</label>
                                                 <img src="./FrontEnd/IMG/pictogramasSGA/GHS04.png" class="img"/>
                                             </div>
                                         </div>
                                         <div class="col border border-1">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="check5" name="option1" value="something" checked>
+                                                <input class="form-check-input" type="checkbox" id="check5" value="GHS-05">
                                                 <label class="form-check-label">GHS-05</label>
                                                 <img src="./FrontEnd/IMG/pictogramasSGA/GHS05.png" class="img"/>
                                             </div>
                                         </div>
                                         <div class="col border border-1">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="check6" name="option1" value="something" checked>
+                                                <input class="form-check-input" type="checkbox" id="check6" value="GHS-06">
                                                 <label class="form-check-label">GHS-06</label>
                                                 <img src="./FrontEnd/IMG/pictogramasSGA/GHS06.png" class="img"/>
                                             </div>
@@ -523,21 +455,21 @@
                                     <div class="row">
                                         <div class="col border border-1">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="check7" name="option1" value="something" checked>
+                                                <input class="form-check-input" type="checkbox" id="check7" value="GHS-07">
                                                 <label class="form-check-label">GHS-07</label>
                                                 <img src="./FrontEnd/IMG/pictogramasSGA/GHS07.png" class="img"/>
                                             </div>
                                         </div>
                                         <div class="col border border-1">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="check8" name="option1" value="something" checked>
+                                                <input class="form-check-input" type="checkbox" id="check8" value="GHS-08">
                                                 <label class="form-check-label">GHS-08</label>
                                                 <img src="./FrontEnd/IMG/pictogramasSGA/GHS08.png" class="img"/>
                                             </div>
                                         </div>
                                         <div class="col border border-1">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="check9" name="option1" value="something" checked>
+                                                <input class="form-check-input" type="checkbox" id="check9" value="GHS-09">
                                                 <label class="form-check-label">GHS-09</label>
                                                 <img src="./FrontEnd/IMG/pictogramasSGA/GHS09.png" class="img"/>
                                             </div>
@@ -559,13 +491,31 @@
                                         <textarea class="form-control" id="frasesP" name="text" placeholder="Frases P"></textarea>
                                         <label for="frasesP">Indique las Frases P separadas por un (;)</label>
                                     </div>
-                                    
-                                    <!--Fabricante (Empresa)-->
-                                    <!--Nombre-->
-                                    <div class="form-floating mt-2">
-                                        <textarea class="form-control" id="Empresa" name="text" placeholder="Distribuidor"></textarea>
-                                        <label for="distribuidor">Distribuidor</label>
+                                    <!--FDS-->
+                                    <div class="bm-3 mt-3">
+                                        <label for="fichaDatosSeguridad" class="form-label">¿Tiene la FDS del reactivo?</label>
+                                        <select
+                                            class="form-control"
+                                            name="fichaDatosSeguridad"
+                                            id="fichaDatosSeguridad"
+                                            required
+                                        >
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select>
                                     </div>
+                                    <!--Fecha de FDS-->
+                                    <div class="bm-3 mt-3">
+                                        <label for="fFDS" class="form-label">Fecha de FDS (última Revisión)</label>
+                                        <input
+                                            type="date"
+                                            class="form-control"
+                                            name="fFDS"
+                                            id="vigenciaFDS"
+                                            required
+                                        />
+                                    </div>
+                                    <!--Botones de Guardar o Cancelar-->
                                     <div class="mt-2">
                                         <button class="btn btn-success" id="guardarNR">Guardar</button>
                                         <button class="btn btn-secondary" id="cancelarNR">Cancelar</button>
@@ -597,30 +547,20 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="table-responsive">
-                                        <table class="table table-hover" id="tablaTr">
+                                        <table class="table table-hover" id="trazabilidadUso">
                                             <thead>
                                                 <tr>
-                                                    <th>Código</th>
+                                                    <th>iD Reactivo</th>
                                                     <th>Nombre</th>
-                                                    <th>Tipo de Movimiento</th>
-                                                    <th>Fecha de Movimiento</th>
-                                                    <th>Cantidad</th>
+                                                    <th>Cantidad Utilizada</th>
                                                     <th>Unidad de Medida</th>
                                                     <th>Usuario Responsable</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>xxx</td>
-                                                    <td>xxx</td>
-                                                    <td>xxx</td>
-                                                    <td>xxx</td>
-                                                    <td>xxx</td>
-                                                    <td>xxx</td>
-                                                    <td>xxx</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                            <tbody id="trazabilidadUsoBody">
+                                                <!-- Las filas se llenarán dinámicamente desde JavaScript -->
+                                              </tbody>
+                                          </table> 
                                     </div>
                                 </div>
                             </div>

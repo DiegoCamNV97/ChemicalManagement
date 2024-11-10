@@ -45,7 +45,18 @@
                 <!--body logIn-->
                     <div class="card-body">
                         <div class="container">
-                            <form action="" id="formulario">
+                            <form action="" id="crearUsuario">
+                                <!--iD-->
+                                <div class="bm-3 mt-3">
+                                    <label for="iD" class="form-label">Número de Identificación</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        name="iD"
+                                        id="dni"
+                                        required
+                                    />
+                                </div>
                                 <!--Nombres-->
                                 <div class="bm-3 mt-3">
                                     <label for="nombres" class="form-label">Nombres</label>
@@ -68,17 +79,6 @@
                                         required
                                     />
                                 </div>
-                                <!--iD-->
-                                <div class="bm-3 mt-3">
-                                    <label for="iD" class="form-label">Número de Identificación</label>
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        name="iD"
-                                        id="iD"
-                                        required
-                                    />
-                                </div>
                                 <!--Fecha de Nacimiento-->
                                 <div class="bm-3 mt-3">
                                     <label for="fn" class="form-label">Fecha de Nacimiento</label>
@@ -86,13 +86,13 @@
                                         type="date"
                                         class="form-control"
                                         name="fn"
-                                        id="fn"
+                                        id="fechaNacimiento"
                                         required
                                     />
                                 </div>
                                 <!--correo-->
                                 <div class="bm-3 mt-3">
-                                    <label for="email" class="form-label">E-Mail</label>
+                                    <label for="email" class="form-label">E-Mail Personal</label>
                                     <input
                                         type="email"
                                         class="form-control"
@@ -101,33 +101,70 @@
                                         required
                                     />
                                 </div>
+                                <!--correo Institucional-->
+                                <div class="bm-3 mt-3">
+                                    <label for="emailI" class="form-label">E-Mail Institucional</label>
+                                    <input
+                                        type="email"
+                                        class="form-control"
+                                        name="emailI"
+                                        id="correoInstitucional"
+                                        required
+                                    />
+                                </div>
+                                <!--Tipo de Usuario-->
+                                <div class="bm-3 mt-3">
+                                    <label for="tipoUsuario" class="form-label">Tipo de Usuario</label>
+                                    <select
+                                        class="form-control"
+                                        name="tipoUsuario"
+                                        id="tipoUsuario"
+                                        required
+                                    >
+                                    <option value="">Seleccione el Tipo de Usuario</option>
+                                    <option value="USUARIO">USUARIO</option>
+                                    <option value="ADMINISTRADOR">ADMINISTRADOR</option>
+                                    </select>
+                                </div>
                                 <!--usuario-->
                                 <div class="bm-3 mt-3">
-                                    <label for="usuario" class="form-label">Usuario Asignado</label>
+                                    <label for="user" class="form-label">Usuario Asignado</label>
                                     <input
                                         type="text"
                                         class="form-control"
-                                        name="usuario"
-                                        id="usuario"
+                                        name="user"
+                                        id="user"
                                         required
                                     />
                                 </div>
                                 <!--Contraseña-->
                                 <div class="bm-3 mt-3">
-                                    <label for="contrasenia" class="form-label">Contraseña Asignada</label>
+                                    <label for="password" class="form-label">Contraseña Asignada</label>
                                     <p><small>Por favor utilice el <a data-bs-toggle="tab" href="#genContra">Generador de Contraseñas</a></small></p>
                                     <input
                                         type="text"
                                         class="form-control"
-                                        name="contrasenia"
-                                        id="contrasenia"
+                                        name="password"
+                                        id="password"
                                         required
                                     />
                                 </div>
+                                <!--Empresa-->
+                                <div class="bm-3 mt-3">
+                                    <label for="empresa" class="form-label">Empresa a la que pertenece:</label>
+                                    <select 
+                                        class="form-control"
+                                        id="empresaSelect"
+                                        name="empresa"
+                                        required
+                                    >
+                                        <option value="">Seleccione una Empresa</option>
+                                    </select>
+                                </div>
                                 <!--Botones-->
                                 <br>
-                                <button class="btn btn-success m-1">Guardar</button>
-                                <button class="btn btn-danger m-1">Cancelar</button>
+                                <button class="btn btn-success">Guardar</button>
+                                <button class="btn btn-danger">Cancelar</button>
                             </form>
                         </div>
                     </div>
