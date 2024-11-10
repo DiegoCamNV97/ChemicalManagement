@@ -2,7 +2,6 @@ package com.chemicalmanagement.manager.entidades;
 
 import jakarta.persistence.*;
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "registrouso")
@@ -10,44 +9,47 @@ public class RegistroUso {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    @Column(name = "cantidadUtilizada")
-    private Double cantidadUtilizada;
-
-    @Column(name = "fechaUso")
+    @Column(name = "fechaUso", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date fechaUso;
 
-    @Column(name = "unidadMedida", length = 90)
-    private String unidadMedida;
+    @Column(name = "cantidadUsada", nullable = false)
+    private Double cantidadUsada;
 
-    @ManyToOne
-    @JoinColumn(name = "Usuarios_id")
-    @JsonBackReference("usuarios-registroUso")
-    private Usuarios usuarios;
+    @Column(name = "observaciones")
+    private String observaciones;
 
+    // Relación con Reactivo
     @ManyToOne
-    @JoinColumn(name = "Reactivos_id")
-    @JsonBackReference("reactivos-registroUso")
-    private Reactivos reactivos;
+    @JoinColumn(name = "reactivo_id", nullable = false)
+    private Reactivo reactivo;
+
+    // Relación con Usuario
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
+
+    // Constructor sin parámetros
+    public RegistroUso() {}
+
+    // Constructor con parámetros
+    public RegistroUso(Date fechaUso, Double cantidadUsada, String observaciones, Reactivo reactivo, Usuario usuario) {
+        this.fechaUso = fechaUso;
+        this.cantidadUsada = cantidadUsada;
+        this.observaciones = observaciones;
+        this.reactivo = reactivo;
+        this.usuario = usuario;
+    }
 
     // Getters y Setters
-
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
-    }
-
-    public Double getCantidadUtilizada() {
-        return cantidadUtilizada;
-    }
-
-    public void setCantidadUtilizada(Double cantidadUtilizada) {
-        this.cantidadUtilizada = cantidadUtilizada;
     }
 
     public Date getFechaUso() {
@@ -58,27 +60,45 @@ public class RegistroUso {
         this.fechaUso = fechaUso;
     }
 
-    public String getUnidadMedida() {
-        return unidadMedida;
+    public Double getCantidadUsada() {
+        return cantidadUsada;
     }
 
-    public void setUnidadMedida(String unidadMedida) {
-        this.unidadMedida = unidadMedida;
+    public void setCantidadUsada(Double cantidadUsada) {
+        this.cantidadUsada = cantidadUsada;
     }
 
-    public Usuarios getUsuarios() {
-        return usuarios;
+    public String getObservaciones() {
+        return observaciones;
     }
 
-    public void setUsuarios(Usuarios usuarios) {
-        this.usuarios = usuarios;
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
     }
 
-    public Reactivos getReactivos() {
-        return reactivos;
+    public Reactivo getReactivo() {
+        return reactivo;
     }
 
-    public void setReactivos(Reactivos reactivos) {
-        this.reactivos = reactivos;
+    public void setReactivo(Reactivo reactivo) {
+        this.reactivo = reactivo;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    @Override
+    public String toString() {
+        return "RegistroUso{" +
+                "id=" + id +
+                ", fechaUso=" + fechaUso +
+                ", cantidadUsada=" + cantidadUsada +
+                ", observaciones='" + observaciones + '\'' +
+                '}';
     }
 }

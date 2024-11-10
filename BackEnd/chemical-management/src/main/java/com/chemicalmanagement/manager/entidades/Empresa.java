@@ -2,7 +2,6 @@ package com.chemicalmanagement.manager.entidades;
 
 import jakarta.persistence.*;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "empresa")
@@ -10,38 +9,41 @@ public class Empresa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    @Column(nullable = false, unique = true, length = 100)
+    @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @Column(nullable = false, length = 45)
+    @Column(name = "numContacto", nullable = false)
     private String numContacto;
 
-    @Column(length = 45)
+    @Column(name = "direccion", nullable = false)
     private String direccion;
 
-    @Column(length = 100)
-    private String numEmergencias;
+    @Column(name = "pais", nullable = false)
+    private String pais;
 
-    @Column(length = 45)
-    private String tipo;
+    // Relación bidireccional con Usuario
+    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Usuario> usuarios;
 
-    @OneToMany(mappedBy = "empresa")
-    @JsonManagedReference("empresa-usuarios")
-    private List<Usuarios> usuarios;
+    // Constructor sin parámetros
+    public Empresa() {}
 
-    @OneToMany(mappedBy = "empresa")
-    @JsonManagedReference("empresa-reactivos")
-    private List<Reactivos> reactivos;
+    // Constructor con parámetros
+    public Empresa(String nombre, String numContacto, String direccion, String pais) {
+        this.nombre = nombre;
+        this.numContacto = numContacto;
+        this.direccion = direccion;
+        this.pais = pais;
+    }
 
     // Getters y Setters
-
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -69,35 +71,30 @@ public class Empresa {
         this.direccion = direccion;
     }
 
-    public String getNumEmergencias() {
-        return numEmergencias;
+    public String getPais() {
+        return pais;
     }
 
-    public void setNumEmergencias(String numEmergencias) {
-        this.numEmergencias = numEmergencias;
+    public void setPais(String pais) {
+        this.pais = pais;
     }
 
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public List<Usuarios> getUsuarios() {
+    public List<Usuario> getUsuarios() {
         return usuarios;
     }
 
-    public void setUsuarios(List<Usuarios> usuarios) {
+    public void setUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
     }
 
-    public List<Reactivos> getReactivos() {
-        return reactivos;
-    }
-
-    public void setReactivos(List<Reactivos> reactivos) {
-        this.reactivos = reactivos;
+    @Override
+    public String toString() {
+        return "Empresa{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", numContacto='" + numContacto + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", pais='" + pais + '\'' +
+                '}';
     }
 }

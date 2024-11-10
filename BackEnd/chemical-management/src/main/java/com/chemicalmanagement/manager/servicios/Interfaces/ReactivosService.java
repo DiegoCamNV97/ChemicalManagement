@@ -1,15 +1,15 @@
 package com.chemicalmanagement.manager.servicios.Interfaces;
 
-import com.chemicalmanagement.manager.entidades.Reactivos;
+import com.chemicalmanagement.manager.entidades.Reactivo;
 import java.util.List;
-import java.util.Optional;
 
 public interface ReactivosService {
-    List<Reactivos> listarReactivos();
-    Optional<Reactivos> buscarPorId(int id);
-    Reactivos guardarReactivo(Reactivos reactivo);
-    void eliminarReactivo(int id);
-    Optional<Reactivos> buscarPorNombre(String nombre);
-    List<Reactivos> listarTodos();
-    List<Reactivos> buscarPorParametros(Integer id, String nombre, String cas);
+    Reactivo guardarReactivo(Reactivo reactivo);
+    Reactivo actualizarReactivo(Reactivo reactivo);
+    void eliminarReactivo(Long id);
+    Reactivo obtenerReactivoPorId(Long id);
+    List<Reactivo> buscarReactivosPorNombre(String nombreReactivo);
+    List<Reactivo> buscarReactivosPorCodigo(String qr);
+    List<Reactivo> buscarReactivosPorNombreCodigoOCas(String nombreReactivo, String qr, String cas);
+    List<Reactivo> listarReactivos();
 }

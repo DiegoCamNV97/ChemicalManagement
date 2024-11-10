@@ -2,62 +2,73 @@ package com.chemicalmanagement.manager.entidades;
 
 import jakarta.persistence.*;
 import java.util.Date;
-import java.util.List;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "usuarios")
-public class Usuarios {
+public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    @Column(name = "dni", nullable = false, length = 100)
+    @Column(name = "dni", nullable = false, unique = true)
     private String dni;
 
-    @Column(name = "nombres", nullable = false, length = 80)
+    @Column(name = "nombres", nullable = false)
     private String nombres;
 
-    @Column(name = "apellidos", nullable = false, length = 80)
+    @Column(name = "apellidos", nullable = false)
     private String apellidos;
 
-    @Column(name = "fechaNacimiento")
+    @Column(name = "fechaNacimiento", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
 
-    @Column(name = "correoPersonal", nullable = false, length = 200)
+    @Column(name = "correoPersonal", nullable = false)
     private String correoPersonal;
 
-    @Column(name = "correoInstitucional", nullable = false, unique = true, length = 200)
+    @Column(name = "correoInstitucional", nullable = false)
     private String correoInstitucional;
 
-    @Column(name = "tipoUsuario", nullable = false, length = 90)
+    @Column(name = "tipoUsuario", nullable = false)
     private String tipoUsuario;
 
-    @Column(name = "usuario", nullable = false, unique = true, length = 500)
-    private String usuario;
+    @Column(name = "user", nullable = false, unique = true)
+    private String user;
 
-    @Column(name = "password", nullable = false, length = 500)
+    @Column(name = "password", nullable = false)
     private String password;
 
+    // Relación con Empresa
     @ManyToOne
-    @JoinColumn(name = "Empresa_id")
-    @JsonBackReference("empresa-usuarios")
+    @JoinColumn(name = "empresa_id")
     private Empresa empresa;
 
-    @OneToMany(mappedBy = "usuarios")
-    @JsonManagedReference("usuarios-registroUso")
-    private List<RegistroUso> registrosUso;
+    // Constructor sin parámetros
+    public Usuario() {}
+
+    // Constructor con parámetros
+    public Usuario(String dni, String nombres, String apellidos, Date fechaNacimiento,
+                   String correoPersonal, String correoInstitucional, String tipoUsuario,
+                   String user, String password, Empresa empresa) {
+        this.dni = dni;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.fechaNacimiento = fechaNacimiento;
+        this.correoPersonal = correoPersonal;
+        this.correoInstitucional = correoInstitucional;
+        this.tipoUsuario = tipoUsuario;
+        this.user = user;
+        this.password = password;
+        this.empresa = empresa;
+    }
 
     // Getters y Setters
-
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -117,12 +128,12 @@ public class Usuarios {
         this.tipoUsuario = tipoUsuario;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getUser() {
+        return user;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public String getPassword() {
@@ -141,11 +152,18 @@ public class Usuarios {
         this.empresa = empresa;
     }
 
-    public List<RegistroUso> getRegistrosUso() {
-        return registrosUso;
-    }
-    
-    public void setRegistrosUso(List<RegistroUso> registrosUso) {
-        this.registrosUso = registrosUso;
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", dni='" + dni + '\'' +
+                ", nombres='" + nombres + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", fechaNacimiento=" + fechaNacimiento +
+                ", correoPersonal='" + correoPersonal + '\'' +
+                ", correoInstitucional='" + correoInstitucional + '\'' +
+                ", tipoUsuario='" + tipoUsuario + '\'' +
+                ", user='" + user + '\'' +
+                '}';
     }
 }

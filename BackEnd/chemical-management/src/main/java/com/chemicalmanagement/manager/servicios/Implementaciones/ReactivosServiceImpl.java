@@ -1,6 +1,6 @@
 package com.chemicalmanagement.manager.servicios.Implementaciones;
 
-import com.chemicalmanagement.manager.entidades.Reactivos;
+import com.chemicalmanagement.manager.entidades.Reactivo;
 import com.chemicalmanagement.manager.repositorios.ReactivosRepository;
 import com.chemicalmanagement.manager.servicios.Interfaces.ReactivosService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,36 +16,43 @@ public class ReactivosServiceImpl implements ReactivosService {
     private ReactivosRepository reactivosRepository;
 
     @Override
-    public List<Reactivos> listarReactivos() {
-        return reactivosRepository.findAll();
-    }
-
-    @Override
-    public Optional<Reactivos> buscarPorId(int id) {
-        return reactivosRepository.findById(id);
-    }
-
-    @Override
-    public Reactivos guardarReactivo(Reactivos reactivo) {
+    public Reactivo guardarReactivo(Reactivo reactivo) {
         return reactivosRepository.save(reactivo);
     }
 
     @Override
-    public void eliminarReactivo(int id) {
+    public Reactivo actualizarReactivo(Reactivo reactivo) {
+        return reactivosRepository.save(reactivo);
+    }
+
+    @Override
+    public void eliminarReactivo(Long id) {
         reactivosRepository.deleteById(id);
     }
 
     @Override
-    public Optional<Reactivos> buscarPorNombre(String nombre) {
-        return reactivosRepository.findByNombreReactivo(nombre);
-    }
-    @Override
-    public List<Reactivos> listarTodos() {
-        return reactivosRepository.findAll();
+    public Reactivo obtenerReactivoPorId(Long id) {
+        Optional<Reactivo> reactivo = reactivosRepository.findById(id);
+        return reactivo.orElse(null);
     }
 
     @Override
-    public List<Reactivos> buscarPorParametros(Integer id, String nombre, String cas) {
-        return reactivosRepository.buscarPorParametros(id, nombre, cas);
+    public List<Reactivo> buscarReactivosPorNombre(String nombreReactivo) {
+        return reactivosRepository.findByNombreReactivoContainingIgnoreCase(nombreReactivo);
+    }
+
+    @Override
+    public List<Reactivo> buscarReactivosPorCodigo(String qr) {
+        return reactivosRepository.findByQr(qr);
+    }
+
+    @Override
+    public List<Reactivo> buscarReactivosPorNombreCodigoOCas(String nombreReactivo, String qr, String cas) {
+        return reactivosRepository.findByNombreReactivoOrQrOrCas(nombreReactivo, qr, cas);
+    }
+
+    @Override
+    public List<Reactivo> listarReactivos() {
+        return reactivosRepository.findAll();
     }
 }

@@ -1,81 +1,56 @@
 package com.chemicalmanagement.manager.controladores;
 
-import com.chemicalmanagement.manager.entidades.Reactivos;
+import com.chemicalmanagement.manager.entidades.Reactivo;
 import com.chemicalmanagement.manager.servicios.Interfaces.ReactivosService;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/reactivos")
-@CrossOrigin(origins = "*")
 public class ReactivosController {
 
-    private final ReactivosService reactivosService;
+    @Autowired
+    private ReactivosService reactivosService;
 
-    public ReactivosController(ReactivosService reactivosService) {
-        this.reactivosService = reactivosService;
-    }
-
-    // Obtener todos los reactivos
-    @GetMapping
-    public ResponseEntity<List<Reactivos>> listarReactivos() {
-        return ResponseEntity.ok(reactivosService.listarReactivos());
-    }
-
-    // Obtener reactivo por ID
-    @GetMapping("/{id}")
-    public ResponseEntity<Reactivos> obtenerReactivoPorId(@PathVariable int id) {
-        Optional<Reactivos> reactivo = reactivosService.buscarPorId(id);
-        return reactivo.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
-    }
-
-    // Crear un nuevo reactivo
     @PostMapping
-    public ResponseEntity<Reactivos> crearReactivo(@RequestBody Reactivos reactivo) {
-        Reactivos nuevoReactivo = reactivosService.guardarReactivo(reactivo);
-        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoReactivo);
+    public ResponseEntity<Reactivo> guardarReactivo(@RequestBody Reactivo reactivo) {
+        Reactivo nuevoReactivo = reactivosService.guardarReactivo(reactivo);
+        return ResponseEntity.ok(nuevoReactivo);
     }
 
-    // Actualizar un reactivo existente
     @PutMapping("/{id}")
-    public ResponseEntity<Reactivos> actualizarReactivo(@PathVariable int id, @RequestBody Reactivos reactivo) {
-        if (reactivosService.buscarPorId(id).isPresent()) {
-            reactivo.setId(id);
-            Reactivos reactivoActualizado = reactivosService.guardarReactivo(reactivo);
-            return ResponseEntity.ok(reactivoActualizado);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+    public ResponseEntity<Reactivo> actualizarReactivo(@PathVariable Long id, @RequestBody Reactivo reactivo) {
+        reactivo.setId(id);
+        Reactivo reactivoActualizado = reactivosService.actualizarReactivo(reactivo);
+        return ResponseEntity.ok(reactivoActualizado);
     }
 
-    // Eliminar un reactivo por ID
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarReactivo(@PathVariable int id) {
-        if (reactivosService.buscarPorId(id).isPresent()) {
-            reactivosService.eliminarReactivo(id);
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+    public ResponseEntity<Void> eliminarReactivo(@PathVariable Long id) {
+        reactivosService.eliminarReactivo(id);
+        return ResponseEntity.noContent().build();
     }
-    // Obtener todos los reactivos o buscar según parámetros
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Reactivo> obtenerReactivoPorId(@PathVariable Long id) {
+        Reactivo reactivo = reactivosService.obtenerReactivoPorId(id);
+        return reactivo != null ? ResponseEntity.ok(reactivo) : ResponseEntity.notFound().build();
+    }
+
     @GetMapping("/buscar")
-    public ResponseEntity<List<Reactivos>> buscarReactivos(
-            @RequestParam(required = false) Integer id,
-            @RequestParam(required = false) String nombre,
-            @RequestParam(required = false) String cas) {
-        List<Reactivos> resultados;
+    public ResponseEntity<List<Reactivo>> buscarReactivos(@RequestParam(required = false) String nombre,
+                                                          @RequestParam(required = false) String codigo,
+                                                          @RequestParam(required = false) String cas) {
+        List<Reactivo> reactivos = reactivosService.buscarReactivosPorNombreCodigoOCas(nombre, codigo, cas);
+        return ResponseEntity.ok(reactivos);
+    }
 
-        if (id == null && (nombre == null || nombre.isEmpty()) && (cas == null || cas.isEmpty())) {
-            resultados = reactivosService.listarTodos();
-        } else {
-            resultados = reactivosService.buscarPorParametros(id, nombre, cas);
-        }
-
-        return ResponseEntity.ok(resultados);
+    @GetMapping
+    public ResponseEntity<List<Reactivo>> listarReactivos() {
+        List<Reactivo> reactivos = reactivosService.listarReactivos();
+        return ResponseEntity.ok(reactivos);
     }
 }

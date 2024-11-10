@@ -16,27 +16,33 @@ public class EmpresaServiceImpl implements EmpresaService {
     private EmpresaRepository empresaRepository;
 
     @Override
-    public List<Empresa> listarEmpresas() {
-        return empresaRepository.findAll();
-    }
-
-    @Override
-    public Optional<Empresa> buscarPorId(int id) {
-        return empresaRepository.findById(id);
-    }
-
-    @Override
     public Empresa guardarEmpresa(Empresa empresa) {
         return empresaRepository.save(empresa);
     }
 
     @Override
-    public void eliminarEmpresa(int id) {
+    public Empresa actualizarEmpresa(Empresa empresa) {
+        return empresaRepository.save(empresa);
+    }
+
+    @Override
+    public void eliminarEmpresa(Long id) {
         empresaRepository.deleteById(id);
     }
 
     @Override
-    public Optional<Empresa> buscarPorNombre(String nombre) {
+    public Empresa obtenerEmpresaPorId(Long id) {
+        Optional<Empresa> empresa = empresaRepository.findById(id);
+        return empresa.orElse(null);
+    }
+
+    @Override
+    public Empresa obtenerEmpresaPorNombre(String nombre) {
         return empresaRepository.findByNombre(nombre);
+    }
+
+    @Override
+    public List<Empresa> listarEmpresas() {
+        return empresaRepository.findAll();
     }
 }
