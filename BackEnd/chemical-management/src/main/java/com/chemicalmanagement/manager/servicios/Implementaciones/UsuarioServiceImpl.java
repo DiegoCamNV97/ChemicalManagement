@@ -16,43 +16,46 @@ public class UsuarioServiceImpl implements UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     @Override
-    public Usuario guardarUsuario(Usuario usuario) {
-        return usuarioRepository.save(usuario);
-    }
-
-    @Override
-    public Usuario actualizarUsuario(Usuario usuario) {
-        return usuarioRepository.save(usuario);
-    }
-
-    @Override
-    public void eliminarUsuario(Long id) {
-        usuarioRepository.deleteById(id);
-    }
-
-    @Override
-    public Usuario obtenerUsuarioPorId(Long id) {
-        Optional<Usuario> usuario = usuarioRepository.findById(id);
-        return usuario.orElse(null);
-    }
-
-    @Override
-    public Usuario obtenerUsuarioPorDni(String dni) {
-        return usuarioRepository.findByDni(dni);
-    }
-
-    @Override
-    public Usuario obtenerUsuarioPorUser(String user) {
-        return usuarioRepository.findByUser(user);
-    }
-
-    @Override
-    public Usuario autenticarUsuario(String user, String password) {
-        return usuarioRepository.findByUserAndPassword(user, password);
-    }
-
-    @Override
-    public List<Usuario> listarUsuarios() {
+    public List<Usuario> obtenerTodos() {
         return usuarioRepository.findAll();
+    }
+
+    @Override
+    public Optional<Usuario> obtenerPorId(Integer id) {
+        return usuarioRepository.findById(id);
+    }
+
+    @Override
+    public Usuario crear(Usuario usuario) {
+        return usuarioRepository.save(usuario);
+    }
+
+    @Override
+    public Optional<Usuario> actualizar(Integer id, Usuario usuario) {
+        return usuarioRepository.findById(id).map(u -> {
+            u.setNombres(usuario.getNombres());
+            u.setApellidos(usuario.getApellidos());
+            u.setCorreoPersonal(usuario.getCorreoPersonal());
+            u.setCorreoInstitucional(usuario.getCorreoInstitucional());
+            u.setTipoUsuario(usuario.getTipoUsuario());
+            u.setUser(usuario.getUser());
+            u.setPassword(usuario.getPassword());
+            return usuarioRepository.save(u);
+        });
+    }
+
+    @Override
+    public boolean eliminar(Integer id) {
+        if (usuarioRepository.existsById(id)) {
+            usuarioRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Optional<Usuario> iniciarSesion(String user, String password) {
+        // Verificación de inicio de sesión utilizando user y password
+        return usuarioRepository.findByUserAndPassword(user, password);
     }
 }

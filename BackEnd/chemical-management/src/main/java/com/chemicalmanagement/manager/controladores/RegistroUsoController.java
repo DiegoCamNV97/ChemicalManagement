@@ -7,54 +7,66 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/registros-uso")
+@RequestMapping("/api/registrouso") // Ruta base para registro de uso
 public class RegistroUsoController {
 
     @Autowired
     private RegistroUsoService registroUsoService;
 
-    @PostMapping
-    public ResponseEntity<RegistroUso> guardarRegistroUso(@RequestBody RegistroUso registroUso) {
-        RegistroUso nuevoRegistro = registroUsoService.guardarRegistroUso(registroUso);
-        return ResponseEntity.ok(nuevoRegistro);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<RegistroUso> actualizarRegistroUso(@PathVariable Long id, @RequestBody RegistroUso registroUso) {
-        registroUso.setId(id);
-        RegistroUso registroActualizado = registroUsoService.actualizarRegistroUso(registroUso);
-        return ResponseEntity.ok(registroActualizado);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarRegistroUso(@PathVariable Long id) {
-        registroUsoService.eliminarRegistroUso(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<RegistroUso> obtenerRegistroUsoPorId(@PathVariable Long id) {
-        RegistroUso registroUso = registroUsoService.obtenerRegistroUsoPorId(id);
-        return registroUso != null ? ResponseEntity.ok(registroUso) : ResponseEntity.notFound().build();
-    }
-
-    @GetMapping("/reactivo/{reactivoId}")
-    public ResponseEntity<List<RegistroUso>> buscarRegistrosPorReactivoId(@PathVariable Long reactivoId) {
-        List<RegistroUso> registros = registroUsoService.buscarRegistrosPorReactivoId(reactivoId);
-        return ResponseEntity.ok(registros);
-    }
-
-    @GetMapping("/reactivo-nombre")
-    public ResponseEntity<List<RegistroUso>> buscarRegistrosPorNombreReactivo(@RequestParam String nombreReactivo) {
-        List<RegistroUso> registros = registroUsoService.buscarRegistrosPorNombreReactivo(nombreReactivo);
-        return ResponseEntity.ok(registros);
-    }
-
+    // Obtener todos los registros de uso
     @GetMapping
-    public ResponseEntity<List<RegistroUso>> listarRegistrosUso() {
-        List<RegistroUso> registros = registroUsoService.listarRegistrosUso();
+    public ResponseEntity<List<RegistroUso>> obtenerTodos() {
+        List<RegistroUso> registros = registroUsoService.obtenerTodos();
         return ResponseEntity.ok(registros);
+    }
+
+    // Obtener registro de uso por ID
+    @GetMapping("/{id}")
+    public ResponseEntity<RegistroUso> obtenerRegistroUsoPorId(@PathVariable Integer id) {
+        Optional<RegistroUso> registroUso = registroUsoService.obtenerPorId(id);
+        return registroUso.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    // Crear un nuevo registro de uso
+    @PostMapping
+    public RegistroUso crearRegistroUso(@RequestBody RegistroUso registroUso) {
+        return registroUsoService.crear(registroUso);
+    }
+
+    // Actualizar registro de uso
+    @PutMapping("/{id}")
+    public ResponseEntity<RegistroUso> actualizarRegistroUso(@PathVariable Integer id, @RequestBody RegistroUso registroUso) {
+        Optional<RegistroUso> registroUsoActualizado = registroUsoService.actualizar(id, registroUso);
+        return registroUsoActualizado.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    // Eliminar registro de uso
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarRegistroUso(@PathVariable Integer id) {
+        if (registroUsoService.eliminar(id)) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    // Buscar registros de uso por ID de usuario
+    @GetMapping("/buscar/usuario")
+    public List<RegistroUso> buscarPorUsuarioId(@RequestParam Integer usuarioId) {
+        return registroUsoService.buscarPorUsuarioId(usuarioId);
+    }
+
+    // Buscar registros de uso por ID de reactivo
+    @GetMapping("/buscar/reactivo")
+    public List<RegistroUso> buscarPorReactivoId(@RequestParam Integer reactivoId) {
+        return registroUsoService.buscarPorReactivoId(reactivoId);
+    }
+
+    // Buscar registros de uso por ID de usuario y reactivo
+    @GetMapping("/buscar/usuario-reactivo")
+    public List<RegistroUso> buscarPorUsuarioIdYReactivoId(@RequestParam Integer usuarioId, @RequestParam Integer reactivoId) {
+        return registroUsoService.buscarPorUsuarioIdYReactivoId(usuarioId, reactivoId);
     }
 }

@@ -7,60 +7,54 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/usuarios")
+@RequestMapping("/api/usuario") // Ruta base para usuarios
 public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
 
-    @PostMapping
-    public ResponseEntity<Usuario> guardarUsuario(@RequestBody Usuario usuario) {
-        Usuario nuevoUsuario = usuarioService.guardarUsuario(usuario);
-        return ResponseEntity.ok(nuevoUsuario);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
-        usuario.setId(id);
-        Usuario usuarioActualizado = usuarioService.actualizarUsuario(usuario);
-        return ResponseEntity.ok(usuarioActualizado);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarUsuario(@PathVariable Long id) {
-        usuarioService.eliminarUsuario(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Usuario> obtenerUsuarioPorId(@PathVariable Long id) {
-        Usuario usuario = usuarioService.obtenerUsuarioPorId(id);
-        return usuario != null ? ResponseEntity.ok(usuario) : ResponseEntity.notFound().build();
-    }
-
-    @GetMapping("/dni/{dni}")
-    public ResponseEntity<Usuario> obtenerUsuarioPorDni(@PathVariable String dni) {
-        Usuario usuario = usuarioService.obtenerUsuarioPorDni(dni);
-        return usuario != null ? ResponseEntity.ok(usuario) : ResponseEntity.notFound().build();
-    }
-
-    @GetMapping("/user/{user}")
-    public ResponseEntity<Usuario> obtenerUsuarioPorUser(@PathVariable String user) {
-        Usuario usuario = usuarioService.obtenerUsuarioPorUser(user);
-        return usuario != null ? ResponseEntity.ok(usuario) : ResponseEntity.notFound().build();
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<Usuario> autenticarUsuario(@RequestParam String user, @RequestParam String password) {
-        Usuario usuario = usuarioService.autenticarUsuario(user, password);
-        return usuario != null ? ResponseEntity.ok(usuario) : ResponseEntity.status(401).build();
-    }
-
+    // Obtener todos los usuarios
     @GetMapping
-    public ResponseEntity<List<Usuario>> listarUsuarios() {
-        List<Usuario> usuarios = usuarioService.listarUsuarios();
-        return ResponseEntity.ok(usuarios);
+    public List<Usuario> obtenerUsuarios() {
+        return usuarioService.obtenerTodos();
+    }
+
+    // Obtener usuario por ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Usuario> obtenerUsuarioPorId(@PathVariable Integer id) {
+        Optional<Usuario> usuario = usuarioService.obtenerPorId(id);
+        return usuario.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    // Crear un nuevo usuario
+    @PostMapping
+    public Usuario crearUsuario(@RequestBody Usuario usuario) {
+        return usuarioService.crear(usuario);
+    }
+
+    // Actualizar usuario
+    @PutMapping("/{id}")
+    public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Integer id, @RequestBody Usuario usuario) {
+        Optional<Usuario> usuarioActualizado = usuarioService.actualizar(id, usuario);
+        return usuarioActualizado.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    // Eliminar usuario
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarUsuario(@PathVariable Integer id) {
+        if (usuarioService.eliminar(id)) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    // Inicio de sesión
+    @PostMapping("/login")
+    public ResponseEntity<Usuario> iniciarSesion(@RequestParam String user, @RequestParam String password) {
+        Optional<Usuario> usuario = usuarioService.iniciarSesion(user, password);
+        return usuario.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(401).build());
     }
 }

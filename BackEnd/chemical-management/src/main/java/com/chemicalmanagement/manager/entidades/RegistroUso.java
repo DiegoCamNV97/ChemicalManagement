@@ -1,55 +1,71 @@
 package com.chemicalmanagement.manager.entidades;
 
 import jakarta.persistence.*;
-import java.util.Date;
+import java.sql.Date;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "registrouso")
+@Table(name = "registroUso")
 public class RegistroUso {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
+
+    @Column(name = "cantidadUtilizada", nullable = false)
+    private Double cantidadUtilizada;
 
     @Column(name = "fechaUso", nullable = false)
-    @Temporal(TemporalType.DATE)
     private Date fechaUso;
 
-    @Column(name = "cantidadUsada", nullable = false)
-    private Double cantidadUsada;
+    @Column(name = "unidadMedida", nullable = false)
+    private String unidadMedida;
 
-    @Column(name = "observaciones")
-    private String observaciones;
-
-    // Relación con Reactivo
-    @ManyToOne
-    @JoinColumn(name = "reactivo_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumns({
+        @JoinColumn(name = "reactivos_id", referencedColumnName = "id", nullable = false),
+        @JoinColumn(name = "reactivos_fabricante_id", referencedColumnName = "fabricante_id", nullable = false)
+    })
+    @JsonIgnoreProperties("registroUso")
     private Reactivo reactivo;
 
-    // Relación con Usuario
-    @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "usuarios_id", nullable = false)
+    @JsonIgnoreProperties("registroUso")
     private Usuario usuario;
 
-    // Constructor sin parámetros
+    //Constructor Vacío
+
     public RegistroUso() {}
 
-    // Constructor con parámetros
-    public RegistroUso(Date fechaUso, Double cantidadUsada, String observaciones, Reactivo reactivo, Usuario usuario) {
+    //Contrsuctor
+
+    public RegistroUso(Integer id, Double cantidadUtilizada, Date fechaUso, String unidadMedida, Reactivo reactivo,
+            Usuario usuario) {
+        this.id = id;
+        this.cantidadUtilizada = cantidadUtilizada;
         this.fechaUso = fechaUso;
-        this.cantidadUsada = cantidadUsada;
-        this.observaciones = observaciones;
+        this.unidadMedida = unidadMedida;
         this.reactivo = reactivo;
         this.usuario = usuario;
     }
 
     // Getters y Setters
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Double getCantidadUtilizada() {
+        return cantidadUtilizada;
+    }
+
+    public void setCantidadUtilizada(Double cantidadUtilizada) {
+        this.cantidadUtilizada = cantidadUtilizada;
     }
 
     public Date getFechaUso() {
@@ -60,20 +76,12 @@ public class RegistroUso {
         this.fechaUso = fechaUso;
     }
 
-    public Double getCantidadUsada() {
-        return cantidadUsada;
+    public String getUnidadMedida() {
+        return unidadMedida;
     }
 
-    public void setCantidadUsada(Double cantidadUsada) {
-        this.cantidadUsada = cantidadUsada;
-    }
-
-    public String getObservaciones() {
-        return observaciones;
-    }
-
-    public void setObservaciones(String observaciones) {
-        this.observaciones = observaciones;
+    public void setUnidadMedida(String unidadMedida) {
+        this.unidadMedida = unidadMedida;
     }
 
     public Reactivo getReactivo() {
@@ -90,15 +98,5 @@ public class RegistroUso {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-    }
-
-    @Override
-    public String toString() {
-        return "RegistroUso{" +
-                "id=" + id +
-                ", fechaUso=" + fechaUso +
-                ", cantidadUsada=" + cantidadUsada +
-                ", observaciones='" + observaciones + '\'' +
-                '}';
     }
 }
