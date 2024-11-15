@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/usuario") // Ruta base para usuarios
+@CrossOrigin(origins = "http://127.0.0.1:5500", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS})
 public class UsuarioController {
 
     @Autowired
@@ -53,8 +53,16 @@ public class UsuarioController {
 
     // Inicio de sesión
     @PostMapping("/login")
-    public ResponseEntity<Usuario> iniciarSesion(@RequestParam String user, @RequestParam String password) {
+    public ResponseEntity<?> iniciarSesion(@RequestBody Map<String, String> credenciales) {
+        String user = credenciales.get("user");
+        String password = credenciales.get("password");
+
+        // Lógica de autenticación
         Optional<Usuario> usuario = usuarioService.iniciarSesion(user, password);
-        return usuario.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(401).build());
+        if (usuario.isPresent()) {
+            return ResponseEntity.ok(usuario.get());
+        } else {
+            return ResponseEntity.status(401).body("Usuario o contraseña incorrectos");
+        }
     }
 }

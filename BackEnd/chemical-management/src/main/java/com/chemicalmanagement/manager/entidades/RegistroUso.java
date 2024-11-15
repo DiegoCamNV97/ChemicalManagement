@@ -30,7 +30,7 @@ public class RegistroUso {
     @JsonIgnoreProperties("registroUso")
     private Reactivo reactivo;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuarios_id", nullable = false)
     @JsonIgnoreProperties("registroUso")
     private Usuario usuario;

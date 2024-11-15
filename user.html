@@ -570,19 +570,6 @@
     <!--JAVA-SCRIPT-->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="./FrontEnd/Library/libraryJS/bootstrap.min.js"></script>
-    <script src="./FrontEnd/Library/libraryJS/bootstrap.bundle.min.js"></script>
-    <script src="./FrontEnd/JavaScript/userSearch.js"></script>
-    <script>
-        document.getElementById("cerrarSesion").addEventListener("click", function() {
-          if (confirm("¿Estás seguro de que deseas cerrar sesión?")) {
-            // Limpiar tokens de sesión o cualquier dato de autenticación
-            localStorage.removeItem("token"); // Si usas localStorage
-            sessionStorage.removeItem("token"); // Si usas sessionStorage
-        
-            // Redireccionar al usuario a la página de inicio de sesión
-            window.location.href = "login.html";
-          }
-        });
-    </script>      
+    <script src="./FrontEnd/Library/libraryJS/bootstrap.bundle.min.js"></script>      
 </body>
 </html>
