@@ -6,18 +6,19 @@ import com.chemicalmanagement.manager.servicios.Interfaces.ReactivoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.util.*;
+
 
 @Service
 public class ReactivoServiceImpl implements ReactivoService {
-
+    
     @Autowired
     private ReactivoRepository reactivoRepository;
 
     @Override
     public List<Reactivo> obtenerTodos() {
-        return reactivoRepository.findAll();
+    return reactivoRepository.findAllWithFabricante();
     }
 
     @Override
@@ -78,4 +79,23 @@ public class ReactivoServiceImpl implements ReactivoService {
     public List<Reactivo> buscarPorFabricanteId(Integer fabricanteId) {
         return reactivoRepository.findByFabricanteId(fabricanteId);
     }
-}
+
+    @Override
+    public List<Reactivo> obtenerPorVencer() {
+        LocalDate hoy = LocalDate.now();
+        LocalDate limite = hoy.plusDays(30); // Alertar reactivos que vencen en los próximos 30 días
+        return reactivoRepository.findPorVencer(hoy, limite);
+    }
+
+    @Override
+    public List<Reactivo> obtenerVencidos() {
+        LocalDate hoy = LocalDate.now();
+        return reactivoRepository.findVencidos(hoy);
+    }
+
+    @Override
+    public List<Reactivo> obtenerConPocoStock() {
+        return reactivoRepository.findConPocoStock(30.0); // Alertar si el stock es menor a 30
+    }
+
+}    

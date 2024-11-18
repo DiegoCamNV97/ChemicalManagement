@@ -67,14 +67,15 @@ public class Reactivo {
     @JsonIgnoreProperties("usuario")
     private java.sql.Date vigenciaFDS;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fabricante_id", nullable = false)
     @JsonIgnoreProperties("reactivos")
     private Fabricante fabricante;
 
-    @OneToMany(mappedBy = "reactivo", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "reactivo", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties("reactivo")
     private List<RegistroUso> registroUsos;
+
 
     //Constructor Vacío
 

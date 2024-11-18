@@ -3,14 +3,15 @@ package com.chemicalmanagement.manager.controladores;
 import com.chemicalmanagement.manager.entidades.Reactivo;
 import com.chemicalmanagement.manager.servicios.Interfaces.ReactivoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/reactivo") // Ruta base para reactivos
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT})
 public class ReactivoController {
 
     @Autowired
@@ -18,8 +19,12 @@ public class ReactivoController {
 
     // Obtener todos los reactivos
     @GetMapping
-    public List<Reactivo> obtenerReactivos() {
-        return reactivoService.obtenerTodos();
+    public ResponseEntity<List<Reactivo>> obtenerReactivos() {
+        List<Reactivo> reactivos = reactivoService.obtenerTodos();
+        if (reactivos.isEmpty()) {
+            return ResponseEntity.noContent().build(); // HTTP 204 si no hay datos
+        }
+        return ResponseEntity.ok(reactivos);
     }
 
     // Obtener reactivo por ID
@@ -31,9 +36,22 @@ public class ReactivoController {
 
     // Crear un nuevo reactivo
     @PostMapping
-    public Reactivo crearReactivo(@RequestBody Reactivo reactivo) {
-        return reactivoService.crear(reactivo);
+    public ResponseEntity<?> crearReactivo(@RequestBody Reactivo reactivo) {
+        try {
+            if (reactivo.getQr() == null || reactivo.getQr().isEmpty()) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El campo QR es obligatorio");
+            }
+            if (reactivo.getFabricante() == null || reactivo.getFabricante().getId() == null) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El fabricante es obligatorio");
+            }
+            Reactivo nuevoReactivo = reactivoService.crear(reactivo);
+            return ResponseEntity.ok(nuevoReactivo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al crear el reactivo");
+        }
     }
+
 
     // Actualizar reactivo
     @PutMapping("/{id}")
@@ -67,5 +85,23 @@ public class ReactivoController {
     @GetMapping("/buscar/fabricante")
     public List<Reactivo> buscarPorFabricanteId(@RequestParam Integer fabricanteId) {
         return reactivoService.buscarPorFabricanteId(fabricanteId);
+    }
+    
+    @GetMapping("/alertas/por-vencer")
+    public ResponseEntity<List<Reactivo>> obtenerReactivosPorVencer() {
+        List<Reactivo> reactivosPorVencer = reactivoService.obtenerPorVencer();
+        return ResponseEntity.ok(reactivosPorVencer);
+    }
+
+    @GetMapping("/alertas/vencidos")
+    public ResponseEntity<List<Reactivo>> obtenerReactivosVencidos() {
+        List<Reactivo> reactivosVencidos = reactivoService.obtenerVencidos();
+        return ResponseEntity.ok(reactivosVencidos);
+    }
+
+    @GetMapping("/alertas/poco-stock")
+    public ResponseEntity<List<Reactivo>> obtenerReactivosConPocoStock() {
+        List<Reactivo> reactivosConPocoStock = reactivoService.obtenerConPocoStock();
+        return ResponseEntity.ok(reactivosConPocoStock);
     }
 }

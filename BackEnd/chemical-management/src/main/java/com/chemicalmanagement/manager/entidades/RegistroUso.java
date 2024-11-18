@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "registroUso")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "usuario", "reactivo"})
 public class RegistroUso {
 
     @Id
@@ -22,7 +23,7 @@ public class RegistroUso {
     @Column(name = "unidadMedida", nullable = false)
     private String unidadMedida;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({
         @JoinColumn(name = "reactivos_id", referencedColumnName = "id", nullable = false),
         @JoinColumn(name = "reactivos_fabricante_id", referencedColumnName = "fabricante_id", nullable = false)
@@ -34,6 +35,7 @@ public class RegistroUso {
     @JoinColumn(name = "usuarios_id", nullable = false)
     @JsonIgnoreProperties("registroUso")
     private Usuario usuario;
+
 
     //Constructor Vacío
 

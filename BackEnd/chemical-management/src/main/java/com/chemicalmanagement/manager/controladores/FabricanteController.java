@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/fabricante") // Ruta base para fabricantes
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT})
 public class FabricanteController {
 
     @Autowired
@@ -18,8 +19,9 @@ public class FabricanteController {
 
     // Obtener todos los fabricantes
     @GetMapping
-    public List<Fabricante> obtenerFabricantes() {
-        return fabricanteService.obtenerTodos();
+    public ResponseEntity<List<Fabricante>> obtenerFabricantes() {
+        List<Fabricante> fabricantes = fabricanteService.obtenerTodosLosFabricantes();
+        return ResponseEntity.ok(fabricantes);
     }
 
     // Obtener fabricante por ID
@@ -49,5 +51,9 @@ public class FabricanteController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
+    }
+    @GetMapping("/buscar")
+    public List<Fabricante> buscarFabricantesPorNombre(@RequestParam String nombre) {
+        return fabricanteService.buscarPorNombre(nombre);
     }
 }

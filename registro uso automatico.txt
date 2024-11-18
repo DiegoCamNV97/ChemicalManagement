@@ -1,0 +1,115 @@
+Modificar el RegistroUsoController para realizar la actualización automática:
+@PostMapping
+public RegistroUso crearRegistroUso(@RequestBody RegistroUso registroUso) {
+    // Crear el registro de uso
+    RegistroUso nuevoRegistro = registroUsoService.crear(registroUso);
+
+    // Calcular y actualizar la existencia del reactivo
+    actualizarExistenciaReactivo(registroUso);
+
+    return nuevoRegistro;
+}
+
+private void actualizarExistenciaReactivo(RegistroUso registroUso) {
+    // Obtener el reactivo asociado
+    Reactivo reactivo = reactivoService.obtenerPorId(registroUso.getReactivosId())
+            .orElseThrow(() -> new IllegalArgumentException("Reactivo no encontrado"));
+
+    // Convertir la cantidad utilizada a la misma unidad que la presentación
+    double cantidadUtilizadaConvertida = convertirUnidades(
+        registroUso.getCantidadUtilizada(), 
+        registroUso.getUnidadMedida(), 
+        reactivo.getUnidadMedida()
+    );
+
+    // Calcular el porcentaje utilizado
+    double porcentajeUtilizado = (cantidadUtilizadaConvertida * 100) / reactivo.getPresentacion();
+
+    // Restar el porcentaje a la existencia actual
+    double nuevaExistencia = reactivo.getExistencia() - porcentajeUtilizado;
+
+    // Actualizar el reactivo con la nueva existencia
+    reactivo.setExistencia(nuevaExistencia);
+    reactivoService.actualizar(reactivo.getId(), reactivo);
+}
+
+private double convertirUnidades(double cantidad, String unidadOrigen, String unidadDestino) {
+    // Conversión de unidades básicas: kg, g, mg, L, mL, uL
+    if (unidadOrigen.equals(unidadDestino)) {
+        return cantidad;
+    }
+
+    switch (unidadOrigen) {
+        case "kg":
+            if (unidadDestino.equals("g")) return cantidad * 1000;
+            if (unidadDestino.equals("mg")) return cantidad * 1_000_000;
+            break;
+
+        case "g":
+            if (unidadDestino.equals("kg")) return cantidad / 1000;
+            if (unidadDestino.equals("mg")) return cantidad * 1000;
+            break;
+
+        case "mg":
+            if (unidadDestino.equals("g")) return cantidad / 1000;
+            if (unidadDestino.equals("kg")) return cantidad / 1_000_000;
+            break;
+
+        case "L":
+            if (unidadDestino.equals("mL")) return cantidad * 1000;
+            if (unidadDestino.equals("uL")) return cantidad * 1_000_000;
+            break;
+
+        case "mL":
+            if (unidadDestino.equals("L")) return cantidad / 1000;
+            if (unidadDestino.equals("uL")) return cantidad * 1000;
+            break;
+
+        case "uL":
+            if (unidadDestino.equals("mL")) return cantidad / 1000;
+            if (unidadDestino.equals("L")) return cantidad / 1_000_000;
+            break;
+    }
+
+    throw new IllegalArgumentException("Unidades no compatibles: " + unidadOrigen + " a " + unidadDestino);
+}
+Explicación del código:
+crearRegistroUso:
+
+Después de crear un nuevo registro de uso, llama a la función actualizarExistenciaReactivo para calcular y actualizar la existencia del reactivo asociado.
+actualizarExistenciaReactivo:
+
+Obtiene el reactivo relacionado al RegistroUso.
+Convierte la cantidad utilizada a la misma unidad de medida que la presentación del reactivo.
+Calcula el porcentaje utilizado y resta ese porcentaje a la existencia actual del reactivo.
+Actualiza la tabla reactivos con el nuevo valor.
+convertirUnidades:
+
+Convierte las cantidades entre las unidades soportadas: kg, g, mg, L, mL, uL.
+Si las unidades no son compatibles, lanza una excepción.
+2. Modificar el Servicio de RegistroUsoService:
+Si no existe aún, asegúrate de agregar un método para actualizar el reactivo en el ReactivoService.
+
+public Optional<Reactivo> actualizar(Integer id, Reactivo reactivo) {
+    Optional<Reactivo> existente = reactivoRepository.findById(id);
+    if (existente.isPresent()) {
+        Reactivo actualizado = existente.get();
+        actualizado.setExistencia(reactivo.getExistencia());
+        reactivoRepository.save(actualizado);
+        return Optional.of(actualizado);
+    }
+    return Optional.empty();
+}
+3. Ejemplo de Funcionamiento:
+Reactivo A:
+
+presentacion = 1 (kg)
+existencia = 100
+Registro de Uso:
+
+cantidadUtilizada = 10 (g)
+Resultado:
+10 g = 0.01 kg
+Porcentaje utilizado: (0.01 * 100) / 1 = 1%
+Nueva existencia: 100 - 1 = 99.
+De esta manera, la existencia del reactivo se ajusta automáticamente según los registros de uso.

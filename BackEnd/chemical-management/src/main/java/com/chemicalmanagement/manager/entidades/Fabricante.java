@@ -28,9 +28,10 @@ public class Fabricante {
     @Column(name = "numeroEmergencia", nullable = false)
     private String numeroEmergencia;
 
-    @OneToMany(mappedBy = "fabricante", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties("fabricante") // Evita serializar de vuelta al fabricante
+    @OneToMany(mappedBy = "fabricante", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("fabricante")
     private List<Reactivo> reactivos;
+
 
     //Constructor Vacío
 

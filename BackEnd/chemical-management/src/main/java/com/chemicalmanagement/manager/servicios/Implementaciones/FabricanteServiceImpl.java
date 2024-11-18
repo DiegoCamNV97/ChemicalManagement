@@ -16,7 +16,7 @@ public class FabricanteServiceImpl implements FabricanteService {
     private FabricanteRepository fabricanteRepository;
 
     @Override
-    public List<Fabricante> obtenerTodos() {
+    public List<Fabricante> obtenerTodosLosFabricantes() {
         return fabricanteRepository.findAll();
     }
 
@@ -49,5 +49,9 @@ public class FabricanteServiceImpl implements FabricanteService {
             return true;
         }
         return false;
+    }
+    @Override
+    public List<Fabricante> buscarPorNombre(String nombre) {
+        return fabricanteRepository.buscarPorNombre(nombre);
     }
 }

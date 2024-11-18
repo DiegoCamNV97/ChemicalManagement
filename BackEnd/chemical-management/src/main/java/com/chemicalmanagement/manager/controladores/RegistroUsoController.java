@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/registrouso") // Ruta base para registro de uso
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT})
 public class RegistroUsoController {
 
     @Autowired
@@ -32,8 +33,12 @@ public class RegistroUsoController {
 
     // Crear un nuevo registro de uso
     @PostMapping
-    public RegistroUso crearRegistroUso(@RequestBody RegistroUso registroUso) {
-        return registroUsoService.crear(registroUso);
+    public ResponseEntity<?> crearRegistroUso(@RequestBody RegistroUso registroUso) {
+        if (registroUso.getReactivo() == null || registroUso.getUsuario() == null) {
+            return ResponseEntity.badRequest().body("Reactivo y Usuario son obligatorios.");
+        }
+        RegistroUso nuevoRegistro = registroUsoService.crear(registroUso);
+        return ResponseEntity.ok(nuevoRegistro);
     }
 
     // Actualizar registro de uso
@@ -52,21 +57,20 @@ public class RegistroUsoController {
         return ResponseEntity.notFound().build();
     }
 
-    // Buscar registros de uso por ID de usuario
-    @GetMapping("/buscar/usuario")
-    public List<RegistroUso> buscarPorUsuarioId(@RequestParam Integer usuarioId) {
-        return registroUsoService.buscarPorUsuarioId(usuarioId);
-    }
-
-    // Buscar registros de uso por ID de reactivo
-    @GetMapping("/buscar/reactivo")
-    public List<RegistroUso> buscarPorReactivoId(@RequestParam Integer reactivoId) {
-        return registroUsoService.buscarPorReactivoId(reactivoId);
-    }
-
-    // Buscar registros de uso por ID de usuario y reactivo
-    @GetMapping("/buscar/usuario-reactivo")
-    public List<RegistroUso> buscarPorUsuarioIdYReactivoId(@RequestParam Integer usuarioId, @RequestParam Integer reactivoId) {
-        return registroUsoService.buscarPorUsuarioIdYReactivoId(usuarioId, reactivoId);
+    @GetMapping("/buscar")
+    public ResponseEntity<List<RegistroUso>> buscarRegistros(
+            @RequestParam(required = false) Integer usuarioId,
+            @RequestParam(required = false) Integer reactivoId) {
+        List<RegistroUso> resultados;
+        if (usuarioId != null && reactivoId != null) {
+            resultados = registroUsoService.buscarPorUsuarioIdYReactivoId(usuarioId, reactivoId);
+        } else if (usuarioId != null) {
+            resultados = registroUsoService.buscarPorUsuarioId(usuarioId);
+        } else if (reactivoId != null) {
+            resultados = registroUsoService.buscarPorReactivoId(reactivoId);
+        } else {
+            resultados = registroUsoService.obtenerTodos();
+        }
+        return ResponseEntity.ok(resultados);
     }
 }

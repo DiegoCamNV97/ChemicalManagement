@@ -2,8 +2,7 @@ package com.chemicalmanagement.manager.servicios.Interfaces;
 
 import com.chemicalmanagement.manager.entidades.Reactivo;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public interface ReactivoService {
     List<Reactivo> obtenerTodos();
@@ -14,4 +13,8 @@ public interface ReactivoService {
     List<Reactivo> buscarPorNombre(String nombreReactivo);
     List<Reactivo> buscarPorCas(String cas);
     List<Reactivo> buscarPorFabricanteId(Integer fabricanteId);
+    List<Reactivo> obtenerPorVencer();
+    List<Reactivo> obtenerVencidos();
+    List<Reactivo> obtenerConPocoStock();
+
 }

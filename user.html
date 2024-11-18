@@ -48,7 +48,13 @@
                         <li class="nav-item">
                             <a class="nav-link" data-bs-toggle="tab" href="#alertas">Alertas</a>
                         <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#fabricantes">Fabricantes</a>
+                        </li>
+                            <li class="nav-item">
                             <a class="nav-link" data-bs-toggle="tab" href="#nuevoR">Nuevo Reactivo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#nuevoFabricante">Nuevo Fabricante</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-bs-toggle="tab" href="#trazabilidad">Trazabilidad de Reactivos</a>
@@ -59,8 +65,8 @@
                         <div class="tab-content">
                             <div class="tab-pane container active p-5" id="search">
                                 <form class="d-flex">
-                                    <input class="form-control me-2" type="text" placeholder="Buscar Reactivo" id="searchInput">
-                                    <button onclick="buscarReactivos()" class="btn btn-primary" type="button" id="buscarG">Buscar</button>
+                                    <input class="form-control me-2" type="text" placeholder="Nombre o CAS del Reactivo" id="buscarReactivo">
+                                    <button class="btn btn-primary" type="button" id="buscarReactivobtn">Buscar</button>
                                 </form>
                                 <div class="container">
                                     <div class="row">
@@ -70,7 +76,8 @@
                                                 <table class="table table-hover" id="reactivosTable">
                                                     <thead>
                                                       <tr>
-                                                        <th>Código (ID)</th>
+                                                        <th>ID</th>
+                                                        <th>Código Interno</th>
                                                         <th>Nombre</th>
                                                         <th>CAS</th>
                                                         <th>Fabricante</th>
@@ -100,138 +107,117 @@
                                     </div>
                                 </div>
                             </div>
+                            <!--Fabricantes-->
+                            <div class="tab-pane fade p-5" id="fabricantes" role="tabpanel">
+                                <form class="d-flex mb-3">
+                                    <input class="form-control me-2" type="text" placeholder="Nombre del Fabricante" id="buscarFabricante">
+                                    <button class="btn btn-primary" type="button" id="buscarFabricantebtn">Buscar</button>
+                                </form>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Nombre</th>
+                                                <th>Número de Contacto</th>
+                                                <th>Dirección</th>
+                                                <th>País</th>
+                                                <th>Número de Emergencia</th>
+                                                <th>Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="fabricantesTableBody">
+                                            <!-- Las filas se llenarán dinámicamente desde JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>                            
                             <!--Alertas-->
-                            <div class="tab-pane container fade mt-2 mb-2" id="alertas">
-                                <ul class="nav nav-tabs">
+                            <div class="tab-pane container p-1" id="alertas">
+                                <ul class="nav nav-tabs" id="alertasTabs" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="#reactV">Reactivos Vencidos</a>
+                                        <a class="nav-link active" id="por-vencer-tab" data-bs-toggle="tab" href="#por-vencer" role="tab">Por Vencer</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#reactPV">Reactivos por Vencer</a>
+                                        <a class="nav-link" id="vencidos-tab" data-bs-toggle="tab" href="#vencidos" role="tab">Vencidos</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#reactPS">Reactivos con Poco Stock</a>
+                                        <a class="nav-link" id="poco-stock-tab" data-bs-toggle="tab" href="#poco-stock" role="tab">Poco Stock</a>
                                     </li>
                                 </ul>
-                                <!--Contenido Reactivos Vencidos-->
-                                <div class="tab-content mt-2">
-                                    <div class="tab-pane container active" id="reactV">
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-hover" id="reactivosV">
-                                                            <thead>
-                                                              <tr>
-                                                                <th>Código (ID)</th>
-                                                                <th>Nombre</th>
-                                                                <th>CAS</th>
-                                                                <th>Fabricante</th>
-                                                                <th>Presentación</th>
-                                                                <th>Unidad de Medida</th>
-                                                                <th>Lote</th>
-                                                                <th>Fecha de Fabricación</th>
-                                                                <th>Fecha de Vencimiento</th>
-                                                                <th>Existencia</th>
-                                                                <th>Fórmula</th>
-                                                                <th>Palabra de Advertencia</th>
-                                                                <th>Pictogramas SGA</th>
-                                                                <th>Frases H</th>
-                                                                <th>Frases P</th>
-                                                                <th>Ficha de Datos de Seguridad</th>
-                                                                <th>Vigencia FDS</th>
-                                                                <th>Opciones</th>
-                                                              </tr>
-                                                            </thead>
-                                                            <tbody id="reactivosVBody">
-                                                              <!-- Las filas se llenarán dinámicamente desde JavaScript -->
-                                                            </tbody>
-                                                          </table>  
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <div class="tab-content" id="alertasTabsContent">
+                                    <div class="tab-pane fade show active" id="por-vencer" role="tabpanel">
+                                        <h5>Reactivos por Vencer</h5>
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Nombre</th>
+                                                    <th>Fabricante</th>
+                                                    <th>Fecha de Vencimiento</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="reactivosPorVencerTableBody"></tbody>
+                                        </table>
                                     </div>
-                                    <!--Reactivos por vencer-->
-                                    <div class="tab-pane container fade" id="reactPV">
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-hover" id="reactivosPV">
-                                                            <thead>
-                                                              <tr>
-                                                                <th>Código (ID)</th>
-                                                                <th>Nombre</th>
-                                                                <th>CAS</th>
-                                                                <th>Fabricante</th>
-                                                                <th>Presentación</th>
-                                                                <th>Unidad de Medida</th>
-                                                                <th>Lote</th>
-                                                                <th>Fecha de Fabricación</th>
-                                                                <th>Fecha de Vencimiento</th>
-                                                                <th>Existencia</th>
-                                                                <th>Fórmula</th>
-                                                                <th>Palabra de Advertencia</th>
-                                                                <th>Pictogramas SGA</th>
-                                                                <th>Frases H</th>
-                                                                <th>Frases P</th>
-                                                                <th>Ficha de Datos de Seguridad</th>
-                                                                <th>Vigencia FDS</th>
-                                                                <th>Opciones</th>
-                                                              </tr>
-                                                            </thead>
-                                                            <tbody id="reactivosPVBody">
-                                                              <!-- Las filas se llenarán dinámicamente desde JavaScript -->
-                                                            </tbody>
-                                                          </table>  
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="tab-pane fade" id="vencidos" role="tabpanel">
+                                        <h5>Reactivos Vencidos</h5>
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Nombre</th>
+                                                    <th>Fabricante</th>
+                                                    <th>Fecha de Vencimiento</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="reactivosVencidosTableBody"></tbody>
+                                        </table>
                                     </div>
-                                    <!--Reactivos con Poco Stock-->
-                                    <div class="tab-pane container fade" id="reactPS">
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-hover" id="reactivosPS">
-                                                            <thead>
-                                                              <tr>
-                                                                <th>Código (ID)</th>
-                                                                <th>Nombre</th>
-                                                                <th>CAS</th>
-                                                                <th>Fabricante</th>
-                                                                <th>Presentación</th>
-                                                                <th>Unidad de Medida</th>
-                                                                <th>Lote</th>
-                                                                <th>Fecha de Fabricación</th>
-                                                                <th>Fecha de Vencimiento</th>
-                                                                <th>Existencia</th>
-                                                                <th>Fórmula</th>
-                                                                <th>Palabra de Advertencia</th>
-                                                                <th>Pictogramas SGA</th>
-                                                                <th>Frases H</th>
-                                                                <th>Frases P</th>
-                                                                <th>Ficha de Datos de Seguridad</th>
-                                                                <th>Vigencia FDS</th>
-                                                                <th>Opciones</th>
-                                                              </tr>
-                                                            </thead>
-                                                            <tbody id="reactivosPSBody">
-                                                              <!-- Las filas se llenarán dinámicamente desde JavaScript -->
-                                                            </tbody>
-                                                        </table>  
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="tab-pane fade" id="poco-stock" role="tabpanel">
+                                        <h5>Reactivos con Poco Stock</h5>
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Nombre</th>
+                                                    <th>Fabricante</th>
+                                                    <th>Existencia</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="reactivosPocoStockTableBody"></tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
-                            <!--Registro de Uso-->
-                            
+                            <!--Nuevo Fabricante-->                            
+                            <!-- Pestaña "Nuevo Fabricante" -->
+                            <div class="tab-pane container p-5" id="nuevoFabricante">
+                                <h2>Registrar Nuevo Fabricante</h2>
+                                <form id="formNuevoFabricante" class="mt-4">
+                                    <div class="mb-3">
+                                        <label for="nombreFabricante" class="form-label">Nombre del Fabricante</label>
+                                        <input type="text" class="form-control" id="nombreFabricante" placeholder="Ingrese el nombre del fabricante" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="numContacto" class="form-label">Número de Contacto</label>
+                                        <input type="text" class="form-control" id="numContacto" placeholder="Ingrese el número de contacto" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="direccion" class="form-label">Dirección</label>
+                                        <input type="text" class="form-control" id="direccion" placeholder="Ingrese la dirección" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="pais" class="form-label">País</label>
+                                        <input type="text" class="form-control" id="pais" placeholder="Ingrese el país" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="numeroEmergencia" class="form-label">Número de Emergencia</label>
+                                        <input type="text" class="form-control" id="numeroEmergencia" placeholder="Ingrese el número de emergencia" required>
+                                    </div>
+                                    <button type="button" id="guardarFabricante" class="btn btn-success">Guardar</button>
+                                </form>
+                            </div>                            
                             <!--Nuevo Reactivo-->
                             <div class="tab-pane container fade mt-2" id="nuevoR">
                                 <form action="" id="nuevoReactivo">
@@ -277,14 +263,16 @@
                                     <!--Fabricante (Empresa)-->
                                     <div class="bm-3 mt-3">
                                         <label for="fabricante" class="form-label">Fabricante:</label>
-                                        <input
-                                            type="text"
+                                        <select
                                             class="form-control"
                                             name="fabricante"
                                             id="fabricante"
                                             required
-                                        />
-                                    </div>
+                                        >
+                                            <option value="">Seleccione un Fabricante</option>
+                                            <!-- Las opciones se cargarán dinámicamente -->
+                                        </select>
+                                    </div>                                    
                                     <!--Presentación-->
                                         <!--Cantidad-->
                                     <div class="bm-3 mt-3">
@@ -350,7 +338,7 @@
                                     </div>
                                     <!--Existencia-->
                                     <div class="bm-3 mt-3">
-                                        <label for="existencia" class="form-label">Existencia (de ser nuvo ponga la cantidad de presentación)</label>
+                                        <label for="existencia" class="form-label">Existencia (de ser nuevo ponga 100)</label>
                                         <input
                                             type="number"
                                             class="form-control"
@@ -524,18 +512,18 @@
                     <div class="tab-pane container fade" id="trazabilidad">
                         <div class="tab-pane container active p-5" id="search">
                             <form class="d-flex">
-                                <input class="form-control me-2" type="text" placeholder="Buscar">
+                                <input class="form-control me-2" type="text" placeholder="Buscar por Reactivo o Usuario">
                                 <button class="btn btn-primary" type="button" id="buscarT">Search</button>
                             </form>
                         </div>
                         <div class="float-right">
                             <!-- Icono de impresión -->
-                            <button class="btn btn-outline-primary">
+                            <button class="btn btn-outline-primary" id="print">
                                 <i class="fas fa-print"></i> Imprimir
                             </button>
                         
                             <!-- Icono de descarga de PDF -->
-                            <button class="btn btn-outline-success">
+                            <button class="btn btn-outline-success" id="pdf">
                                 <i class="fas fa-file-pdf"></i> Descargar PDF
                             </button>
                         </div>
@@ -561,6 +549,10 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>            
         <div class="card-footer bg-dark text-white">
             <small>Todos los derechos reservados ©2024 - ChemicalManagement™</small>
         </div>
@@ -568,8 +560,17 @@
     </div>
 
     <!--JAVA-SCRIPT-->
+    <script>
+        const API_BASE_URL = "http://localhost:8080/api";
+    </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="./FrontEnd/Library/libraryJS/bootstrap.min.js"></script>
-    <script src="./FrontEnd/Library/libraryJS/bootstrap.bundle.min.js"></script>      
+    <script src="./FrontEnd/Library/libraryJS/bootstrap.bundle.min.js"></script>
+    <script src="./FrontEnd/JavaScript/user/buscadorReactivos.js"></script>
+    <script src="./FrontEnd/JavaScript/user/buscadorFabricantes.js"></script>
+    <script src="./FrontEnd/JavaScript/user/alertas.js"></script>
+    <script src="./FrontEnd/JavaScript/user/nuevoReactivo.js"></script>
+    <script src="./FrontEnd/JavaScript/user/nuevoFabricante.js"></script>
+    <script src="./FrontEnd/JavaScript/user/trazabilidad.js"></script>
 </body>
 </html>
