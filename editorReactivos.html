@@ -40,8 +40,7 @@
             <div class="card">
                 <div class="card-header bg-dark text-white">Editor de Reactivos</div>
                 <div class="card-body">
-
-                    <form action="" id="formulario">
+                    <form action="" id="nuevoReactivo">
                         <!--Nombres-->
                         <div>
                             <label for="nombre" class="form-label mt-2">Nombre del Reactivo</label>
@@ -49,68 +48,80 @@
                                 type="text"
                                 class="form-control"
                                 name="nombre"
-                                id="nombre"
+                                id="nombreReactivo"
                                 required
                             />
                         </div>
-                            <!--Código-->
+                        <!--Código-->
                         <div class="bm-3 mt-3">
                             <label for="codigo" class="form-label">Código Interno Asignado</label>
                             <input
                                 type="text"
                                 class="form-control"
                                 name="codigo"
-                                id="codigo"
+                                id="qr"
                                 required
                             />
                         </div>
-                        <!--Datos Básicos-->
+                        <!--Ubicación-->
                         <div>
                             <label for="ubicacion" class="form-label mt-2">Ubicación del Reactivo</label>
                             <select
                                 class="form-control"
-                                name="nombre"
-                                id="nombre"
+                                name="ubicacion"
+                                id="ubicacion"
                                 required
                             >
                                 <option value="">Seleccione una Ubicación</option>
-                                <option value="">Ubicación 1</option>
-                                <option value="">Ubicación 2</option>
-                                <option value="">Ubicación 3</option>
-                                <option value="">Ubicación 4</option>
-                                <option value="">Ubicación 5</option>
+                                <option value="Ubicación 1">Ubicación 1</option>
+                                <option value="Ubicación 2">Ubicación 2</option>
+                                <option value="Ubicación 3">Ubicación 3</option>
+                                <option value="Ubicación 4">Ubicación 4</option>
+                                <option value="Ubicación 5">Ubicación 5</option>
                             </select>
                         </div>
-                            <!--Unidad-->
+                        <!--Fabricante (Empresa)-->
+                        <div class="bm-3 mt-3">
+                            <label for="fabricante" class="form-label">Fabricante:</label>
+                            <select
+                                class="form-control"
+                                name="fabricante"
+                                id="fabricante"
+                                required
+                            >
+                                <option value="">Seleccione un Fabricante</option>
+                                <!-- Las opciones se cargarán dinámicamente -->
+                            </select>
+                        </div>                                    
+                        <!--Presentación-->
+                            <!--Cantidad-->
+                        <div class="bm-3 mt-3">
+                            <label for="presentacion" class="form-label">Presentación</label>
+                            <input
+                                type="number"
+                                class="form-control"
+                                name="presentacion"
+                                id="presentacion"
+                                required
+                            />
+                        </div>
+                            <!--Unidad de Medida-->
                         <div class="bm-3 mt-3">
                             <label for="unidad" class="form-label">Unidad de Medida</label>
                             <select
                                 class="form-control"
                                 name="unidad"
-                                id="unidad"
+                                id="unidadMedida"
                                 required
                             >
                                 <option value="">Seleccione una Unidad de Medida</option>
-                                <option value="">L</option>
-                                <option value="">mL</option>
-                                <option value="">uL</option>
-                                <option value="">kg</option>
-                                <option value="">g</option>
-                                <option value="">mg</option>
+                                <option value="L">L (Litros)</option>
+                                <option value="mL">mL (Mililitros)</option>
+                                <option value="uL">uL (Microlitros)</option>
+                                <option value="kg">kg (Kilogramos)</option>
+                                <option value="g">g (Gramos)</option>
+                                <option value="mg">mg (Miligramos</option>
                             </select>
-                        </div>
-                            <!--Cantidad-->
-                        <div class="bm-3 mt-3">
-                            <label for="cantidad" class="form-label">Presentación</label>
-                            <p><small>Sensibilidad de 0.0001</small></p>
-                            <input
-                                type="number"
-                                step="0.0001"
-                                class="form-control"
-                                name="cantidad"
-                                id="cantidad"
-                                required
-                            />
                         </div>
                         <!--Lote-->
                         <div class="bm-3 mt-3">
@@ -130,22 +141,33 @@
                                 type="date"
                                 class="form-control"
                                 name="fF"
-                                id="fF"
+                                id="fechaFabricacion"
                                 required
                             />
                         </div>
-                            <!--Fecha de Vencimiento-->
+                        <!--Fecha de Vencimiento-->
                         <div class="bm-3 mt-3">
                             <label for="fV" class="form-label">Fecha de Vencimiento</label>
                             <input
                                 type="date"
                                 class="form-control"
                                 name="fV"
-                                id="fV"
+                                id="fechaVencimiento"
                                 required
                             />
                         </div>
-                            <!--Número CAS-->
+                        <!--Existencia-->
+                        <div class="bm-3 mt-3">
+                            <label for="existencia" class="form-label">Existencia (de ser nuevo ponga 100)</label>
+                            <input
+                                type="number"
+                                class="form-control"
+                                name="existencia"
+                                id="existencia"
+                                required
+                            />
+                        </div> 
+                        <!--Número CAS-->
                         <div class="bm-3 mt-3">
                             <label for="cas" class="form-label">CAS</label>
                             <input
@@ -156,18 +178,30 @@
                                 required
                             />
                         </div>
-                            <!--Palabra Advertencia-->
+                        <!--Formula Química-->
                         <div class="bm-3 mt-3">
-                            <label for="palabraA" class="form-label">Palabra de Advertencia</label>
+                            <label for="formula" class="form-label">Formula Química</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="formula"
+                                id="formula"
+                                required
+                            />
+                        </div>
+                        <!--Palabra Advertencia-->
+                        <div class="bm-3 mt-3">
+                            <label for="palabraAdvertencia" class="form-label">Palabra de Advertencia</label>
                             <select
                                 class="form-control"
-                                name="lote"
-                                id="lote"
+                                name="palabraAdvertencia"
+                                id="palabraAdvertencia"
                                 required
                             >
                                 <option value="">Seleccione la Palabra de Advertencia</option>
-                                <option value="">Atención</option>
-                                <option value="">Peligro</option>
+                                <option value="Atención">Atención</option>
+                                <option value="Peligro">Peligro</option>
+                                <option value="No Aplica">No Aplica</option>
                             </select>
                         </div>
                         <!--Pictogramas-->
@@ -179,21 +213,21 @@
                         <div class="row">
                             <div class="col border border-1">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="check1" name="option1" value="something" checked>
+                                    <input class="form-check-input" type="checkbox" id="check1" value="GHS-01">
                                     <label class="form-check-label">GHS-01</label>
                                     <img src="./FrontEnd/IMG/pictogramasSGA/GHS01.png" class="img"/>
                                 </div>
                             </div>
                             <div class="col border border-1">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="check2" name="option1" value="something" checked>
+                                    <input class="form-check-input" type="checkbox" id="check2" value="GHS-02">
                                     <label class="form-check-label">GHS-02</label>
                                     <img src="./FrontEnd/IMG/pictogramasSGA/GHS02.png" class="img"/>
                                 </div>
                             </div>
                             <div class="col border border-1">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="check3" name="option1" value="something" checked>
+                                    <input class="form-check-input" type="checkbox" id="check3" value="GHS-03">
                                     <label class="form-check-label">GHS-03</label>
                                     <img src="./FrontEnd/IMG/pictogramasSGA/GHS03.png" class="img"/>
                                 </div>
@@ -202,21 +236,21 @@
                         <div class="row">
                             <div class="col border border-1">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="check4" name="option1" value="something" checked>
+                                    <input class="form-check-input" type="checkbox" id="check4" value="GHS-04">
                                     <label class="form-check-label">GHS-04</label>
                                     <img src="./FrontEnd/IMG/pictogramasSGA/GHS04.png" class="img"/>
                                 </div>
                             </div>
                             <div class="col border border-1">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="check5" name="option1" value="something" checked>
+                                    <input class="form-check-input" type="checkbox" id="check5" value="GHS-05">
                                     <label class="form-check-label">GHS-05</label>
                                     <img src="./FrontEnd/IMG/pictogramasSGA/GHS05.png" class="img"/>
                                 </div>
                             </div>
                             <div class="col border border-1">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="check6" name="option1" value="something" checked>
+                                    <input class="form-check-input" type="checkbox" id="check6" value="GHS-06">
                                     <label class="form-check-label">GHS-06</label>
                                     <img src="./FrontEnd/IMG/pictogramasSGA/GHS06.png" class="img"/>
                                 </div>
@@ -225,21 +259,21 @@
                         <div class="row">
                             <div class="col border border-1">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="check7" name="option1" value="something" checked>
+                                    <input class="form-check-input" type="checkbox" id="check7" value="GHS-07">
                                     <label class="form-check-label">GHS-07</label>
                                     <img src="./FrontEnd/IMG/pictogramasSGA/GHS07.png" class="img"/>
                                 </div>
                             </div>
                             <div class="col border border-1">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="check8" name="option1" value="something" checked>
+                                    <input class="form-check-input" type="checkbox" id="check8" value="GHS-08">
                                     <label class="form-check-label">GHS-08</label>
                                     <img src="./FrontEnd/IMG/pictogramasSGA/GHS08.png" class="img"/>
                                 </div>
                             </div>
                             <div class="col border border-1">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="check9" name="option1" value="something" checked>
+                                    <input class="form-check-input" type="checkbox" id="check9" value="GHS-09">
                                     <label class="form-check-label">GHS-09</label>
                                     <img src="./FrontEnd/IMG/pictogramasSGA/GHS09.png" class="img"/>
                                 </div>
@@ -261,16 +295,34 @@
                             <textarea class="form-control" id="frasesP" name="text" placeholder="Frases P"></textarea>
                             <label for="frasesP">Indique las Frases P separadas por un (;)</label>
                         </div>
-                        
-                    <!--Distribuidor-->
-                        <!--Nombre-->
-                        <div class="form-floating mt-2">
-                            <textarea class="form-control" id="distribuidor" name="text" placeholder="Distribuidor"></textarea>
-                            <label for="distribuidor">Distribuidor</label>
+                        <!--FDS-->
+                        <div class="bm-3 mt-3">
+                            <label for="fichaDatosSeguridad" class="form-label">¿Tiene la FDS del reactivo?</label>
+                            <select
+                                class="form-control"
+                                name="fichaDatosSeguridad"
+                                id="fichaDatosSeguridad"
+                                required
+                            >
+                                <option value="Si">Si</option>
+                                <option value="No">No</option>
+                            </select>
                         </div>
+                        <!--Fecha de FDS-->
+                        <div class="bm-3 mt-3">
+                            <label for="fFDS" class="form-label">Fecha de FDS (última Revisión)</label>
+                            <input
+                                type="date"
+                                class="form-control"
+                                name="fFDS"
+                                id="vigenciaFDS"
+                                required
+                            />
+                        </div>
+                        <!--Botones de Guardar o Cancelar-->
                         <div class="mt-2">
-                            <button class="btn btn-success" id="guardarNR">Guardar</button>
-                            <button class="btn btn-secondary" id="cancelarNR">Cancelar</button>
+                            <button class="btn btn-success" id="guardarCambios">Guardar</button>
+                            <button class="btn btn-secondary" id="cancelarCambios">Cancelar</button>
                         </div>
                     </form>
                 </div>
@@ -285,5 +337,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="./FrontEnd/Library/libraryJS/bootstrap.min.js"></script>
     <script src="./FrontEnd/Library/libraryJS/bootstrap.bundle.min.js"></script>
+    <script src="./FrontEnd/JavaScript/editorReactivos/CargaYGuardar.js"></script>
 </body>
 </html>

@@ -38,7 +38,7 @@ async function guardarFabricante() {
         } else {
             // Manejar errores de servidor
             const errorData = await response.json();
-            alert(`Error al registrar el fabricante: ${errorData.message || "Error desconocido"}`);
+            alert(`Error al registrar el fabricante: ${errorData.message || "Nombre de Fabricante, Número de Contacto o Dirección duplicados"}`);
         }
     } catch (error) {
         console.error("Error al guardar el fabricante:", error);

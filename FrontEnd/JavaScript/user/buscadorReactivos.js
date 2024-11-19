@@ -51,7 +51,7 @@ async function buscarReactivos() {
                 <td>${reactivo.fichaDatosSeguridad || ""}</td>
                 <td>${reactivo.vigenciaFDS || ""}</td>
                 <td>
-                    <button class="btn btn-success btn-editar" data-id="${reactivo.id}">Editar</button>
+                    <button class="btn btn-success btn-editarR" data-id="${reactivo.id}">Editar</button>
                     <button class="btn btn-danger btn-eliminar" data-id="${reactivo.id}">Eliminar</button>
                     <button class="btn btn-secondary btn-regUso" data-id="${reactivo.id}">Registrar Uso</button>
                 </td>
@@ -102,7 +102,7 @@ function agregarEventosBotones() {
             window.location.href = `registroUso.html?id=${id}`;
         });
     });
-    document.querySelectorAll(".btn-editar").forEach((button) => {
+    document.querySelectorAll(".btn-editarR").forEach((button) => {
         button.addEventListener("click", (event) => {
             const id = event.target.dataset.id;
             window.location.href = `editorReactivos.html?id=${id}`;
