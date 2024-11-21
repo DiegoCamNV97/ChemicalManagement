@@ -45,7 +45,7 @@
                 <!--body logIn-->
                     <div class="card-body">
                         <div class="container">
-                            <form action="" id="crearUsuario">
+                            <form action="" id="editarUsuario">
                                 <!--iD-->
                                 <div class="bm-3 mt-3">
                                     <label for="iD" class="form-label">Número de Identificación</label>
@@ -140,7 +140,6 @@
                                 <!--Contraseña-->
                                 <div class="bm-3 mt-3">
                                     <label for="password" class="form-label">Contraseña Asignada</label>
-                                    <p><small>Por favor utilice el <a data-bs-toggle="tab" href="#genContra">Generador de Contraseñas</a></small></p>
                                     <input
                                         type="text"
                                         class="form-control"
@@ -151,8 +150,8 @@
                                 </div>
                                 <!--Botones-->
                                 <br>
-                                <button class="btn btn-success">Guardar</button>
-                                <button class="btn btn-danger">Cancelar</button>
+                                <button class="btn btn-success" id="guardarUsuario">Guardar</button>
+                                <button class="btn btn-danger" id="cancelarEdicionU">Cancelar</button>
                             </form>
                         </div>
                     </div>
@@ -166,7 +165,10 @@
     </div>
 
     <!--JAVA-SCRIPT-->
-    <script src="./FrontEnd/Library/scriptAdmin.js"></script>
+    <script>
+        const API_BASE_URL = "http://localhost:8080/api";
+    </script>
+    <script src="./FrontEnd/JavaScript/editorUsuarios/editorUsuarios.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="./FrontEnd/Library/libraryJS/bootstrap.min.js"></script>
     <script src="./FrontEnd/Library/libraryJS/bootstrap.bundle.min.js"></script>

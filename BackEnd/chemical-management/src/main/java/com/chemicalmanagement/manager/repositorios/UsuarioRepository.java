@@ -18,4 +18,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
     // Método para verificar usuario y contraseña (para autenticación)
     Optional<Usuario> findByUserAndPassword(String user, String password);
+
+    //Método para buscar usuario por dni, nombres, apellidos o usuario asignado
+    List<Usuario> findByDniContainingOrUserContaining(String dni, String user);
 }

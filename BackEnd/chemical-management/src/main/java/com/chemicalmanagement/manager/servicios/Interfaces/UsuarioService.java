@@ -12,4 +12,6 @@ public interface UsuarioService {
     Optional<Usuario> actualizar(Integer id, Usuario usuario);
     boolean eliminar(Integer id);
     Optional<Usuario> iniciarSesion(String user, String password); // Método de autenticación
+    List<Usuario> buscarPorDniOUsuario(String query);
+
 }

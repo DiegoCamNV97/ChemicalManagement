@@ -58,4 +58,9 @@ public class UsuarioServiceImpl implements UsuarioService {
         // Verificación de inicio de sesión utilizando user y password
         return usuarioRepository.findByUserAndPassword(user, password);
     }
+    @Override
+    public List<Usuario> buscarPorDniOUsuario(String query) {
+        return usuarioRepository.findByDniContainingOrUserContaining(query, query);
+    }
+
 }

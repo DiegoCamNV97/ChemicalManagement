@@ -65,4 +65,13 @@ public class UsuarioController {
             return ResponseEntity.status(401).body("Usuario o contraseña incorrectos");
         }
     }
+    @PostMapping("/buscar")
+    public List<Usuario> buscarUsuarios(@RequestBody Map<String, String> body) {
+        String query = body.get("query");
+        if (query == null || query.trim().isEmpty()) {
+            return usuarioService.obtenerTodos();
+        }
+        return usuarioService.buscarPorDniOUsuario(query);
+    }
+
 }
